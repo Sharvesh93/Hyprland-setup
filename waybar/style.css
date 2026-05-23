@@ -1,13 +1,11 @@
-@import 'colors/dracula.css';
+@import 'colors/color_scheme.css';
 
 * {
     font-family: "JetBrainsMono Nerd Font";
     font-size: 13px;
     font-weight: bold;
-
     border: none;
     border-radius: 0px;
-
     min-height: 0;
     padding: 0;
     margin: 0;
@@ -18,21 +16,21 @@ window#waybar {
 }
 
 tooltip {
-    background : @bg0;
-    border : 1px solid @bg3;
+    background : @green;
+    border : 20px solid @bg3;
     border-radius:12px;
 }
-tootltip label {
+tooltip label {
     color:@fg;
     padding:6px;
 }
 
 #workspaces {
-    background-color: @bg0;
+    background : transparent;
     padding :5px 3px;
     margin : 0 0 0 12px ;
     border-radius : 18px;
-    border: 1px solid @bg1;
+    border: 1px solid @green;
     color: @fg;
 }
 #workspaces button{
@@ -40,18 +38,20 @@ tootltip label {
     margin :0px 3px;
     color : transparent;
     border-radius: 50px;
-    background-color: @bg1;
+    border : 1px dotted @green;
+    background-color: transparent;
     transition : all 0.3s ease-in-out;
 }
 #workspaces button.active {
-    background-color: @blue;
+    background-color: @green;
     color : @bg0;
     min-width : 50px;
     transition : all 0.3s ease-in-out;
     font-size : 13px;
 }
-#workspaces button.hover {
-    background-color:@purple ;
+#workspaces button.hover 
+{
+    background-color:@purple;
     color: @bg0;
     border-radius : 16px;
     min-width : 50px;
@@ -60,32 +60,37 @@ tootltip label {
 #workspaces button.urgent{
     background-color : @red;
     color : @bg0;
+    border : 1px solid @white;
     border-radius : 16px;
     min-width : 50px;
     background-size : 400% 400%;
     transition : all 0.3s ease-in-out;
 }
 
-#battery , #pulseaudio , #network, #clock,#custom-notification {
-    background-color : @bg0;
+#battery , #pulseaudio , #network, #bluetooth, #clock,#custom-notification {
+    background-color : transparent;
     padding : 0 15px 0 15px;
     margin : 0 0 0 12px;
     border-radius : 50px;
-    border : 1px solid @bg1;
+    border : 1px solid @green;
 }
 #clock {
-    color :@blue;
+    color :@purple;
 }
 #custom-notification {
     color : @fg;
     margin : 0 12px 0 12px ;
 }
 #pulseaudio {
-    color : @yellow;
+    color : @purple ;
 }
 #network {
-    color : @purple;
+    color : @purple ;
+    margin : 0 12px 0 12px;
 }
 #battery {
     color : @green ;
+}
+#bluetooth {
+    color : @purple ;
 }
