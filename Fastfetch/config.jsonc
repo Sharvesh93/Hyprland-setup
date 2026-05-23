@@ -1,0 +1,37 @@
+
+{
+ 
+"logo": {
+  "type": "kitty-direct",
+  "source": "~/Pictures/Wallpapers/Zoro.png",
+  "width": 30
+},
+
+  "display": {
+    "separator": " 󰁔 "
+  },
+
+  "modules": [
+    "break",
+    {
+      "type": "title",
+      "color": {
+        "user": "blue",
+        "at": "white",
+        "host": "cyan"
+      }
+    },
+    "break",
+    "os",
+    "kernel",
+    "packages",
+    "shell",
+    "wm",
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory",
+    "uptime"
+  ]
+}
+
