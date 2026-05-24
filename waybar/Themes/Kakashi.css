@@ -1,0 +1,18 @@
+@define-color bg0 #08111f;
+@define-color bg1 #0b1d33;
+@define-color bg2 #112742;
+@define-color bg3 #1f4068;
+@define-color bg4 #2d5d8a;
+
+@define-color red    #c94f4f;
+@define-color orange #d89a5b;
+@define-color yellow #f1d38b;
+@define-color green  #7ee787;
+@define-color aqua   #4fc3f7;
+@define-color blue   #3b82c4;
+@define-color purple #8b7fd7;
+
+@define-color fg     #eaf4ff;
+@define-color grey0  #5f6f86;
+@define-color grey1  #7a8ca5;
+@define-color grey2  #b8c7d9;

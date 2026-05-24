@@ -1,4 +1,4 @@
-@import 'colors/color_scheme.css';
+@import "colors/color_scheme.css";
 
 * {
     font-family: "JetBrainsMono Nerd Font";
@@ -13,84 +13,120 @@
 
 window#waybar {
     background: transparent;
-}
-
-tooltip {
-    background : @green;
-    border : 20px solid @bg3;
-    border-radius:12px;
-}
-tooltip label {
-    color:@fg;
-    padding:6px;
-}
-
-#workspaces {
-    background : transparent;
-    padding :5px 3px;
-    margin : 0 0 0 12px ;
-    border-radius : 18px;
-    border: 1px solid @green;
     color: @fg;
 }
-#workspaces button{
-    padding : 0px 6px;
-    margin :0px 3px;
-    color : transparent;
-    border-radius: 50px;
-    border : 1px dotted @green;
-    background-color: transparent;
-    transition : all 0.3s ease-in-out;
-}
-#workspaces button.active {
-    background-color: @green;
-    color : @bg0;
-    min-width : 50px;
-    transition : all 0.3s ease-in-out;
-    font-size : 13px;
-}
-#workspaces button.hover 
-{
-    background-color:@purple;
-    color: @bg0;
-    border-radius : 16px;
-    min-width : 50px;
-    background-size : 400% 400%;
-}
-#workspaces button.urgent{
-    background-color : @red;
-    color : @bg0;
-    border : 1px solid @white;
-    border-radius : 16px;
-    min-width : 50px;
-    background-size : 400% 400%;
-    transition : all 0.3s ease-in-out;
+
+/* Tooltip */
+
+tooltip {
+    background: @aqua;
+    border: 2px solid @bg2;
+    border-radius: 12px;
 }
 
-#battery , #pulseaudio , #network, #bluetooth, #clock,#custom-notification {
-    background-color : transparent;
-    padding : 0 15px 0 15px;
-    margin : 0 0 0 12px;
-    border-radius : 50px;
-    border : 1px solid @green;
+tooltip label {
+    color: @bg0;
+    padding: 6px;
 }
-#clock {
-    color :@purple;
+
+/* Workspaces */
+
+#workspaces {
+    background: alpha(@bg1, 0.75);
+
+    border: 1px solid @aqua;
+    border-radius: 14px;
+
+    padding: 2px 6px;
+    margin: 6px 4px;
+
+    min-height: 28px;
 }
-#custom-notification {
-    color : @fg;
-    margin : 0 12px 0 12px ;
+
+#workspaces button {
+    background: transparent;
+    color: @grey1;
+
+    border-radius: 10px;
+
+    padding: 0 8px;
+    margin: 2px;
+
+    min-width: 18px;
+    min-height: 18px;
+
+    transition: all 0.2s ease-in-out;
 }
-#pulseaudio {
-    color : @purple ;
+
+#workspaces button.active {
+    background: @blue;
+    color: @fg;
+
+    min-width: 50px;
+
+    transition: all 0.3s ease-in-out;
+
+    font-size: 13px;
 }
-#network {
-    color : @purple ;
-    margin : 0 12px 0 12px;
+
+#workspaces button:hover {
+    background: alpha(@aqua, 0.18);
+    color: @fg;
+
+    border-radius: 16px;
+
+    min-width: 50px;
 }
-#battery {
-    color : @green ;
+
+#workspaces button.urgent {
+    background-color: @red;
+    color: @bg2;
+
+    border: 1px solid @fg;
+    border-radius: 16px;
+
+    min-width: 50px;
+
+    transition: all 0.3s ease-in-out;
 }
-#bluetooth {
-    color : @purple ;
+
+/* Modules */
+
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#clock,
+#custom-notification,
+#tray {
+    background: alpha(@bg2, 0.88);
+
+    color: @fg;
+
+    border: 1px solid @aqua;
+    border-radius: 14px;
+
+    padding: 0 10px;
+    margin: 6px 4px;
+
+    min-height: 28px;
+}
+
+/* Battery states */
+
+#battery.charging,
+#battery.full {
+    color: @green;
+}
+
+#battery.warning,
+#battery.critical {
+    color: @red;
+}
+
+/* Muted states */
+
+#network.disconnected,
+#tray {
+    color: @grey1;
 }
