@@ -7,7 +7,7 @@ if [ $os = "Arch" ]; then
         base-devel \
         git \
         neovim \
-        tmux \
+        fzf \
         kitty \
         fish \
         nautilus \
