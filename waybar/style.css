@@ -1,132 +1,96 @@
-@import "colors/color_scheme.css";
+/* @import "$HOME/.config/colors/colors.css" */
+@import "../colors/colors.css";
 
 * {
     font-family: "JetBrainsMono Nerd Font";
     font-size: 13px;
     font-weight: bold;
-    border: none;
-    border-radius: 0px;
+    background-color: transparent;
+    border-radius: 5px;
     min-height: 0;
-    padding: 0;
-    margin: 0;
 }
 
-window#waybar {
-    background: transparent;
-    color: @fg;
-}
-
-/* Tooltip */
-
+window,
 tooltip {
-    background: @aqua;
-    border: 2px solid @bg2;
-    border-radius: 12px;
+    background-color: @background;
 }
 
-tooltip label {
-    color: @bg0;
-    padding: 6px;
+#waybar {
+    background: alpha(@background, 0.6);
+    border-radius: 0;
 }
-
-/* Workspaces */
 
 #workspaces {
-    background: alpha(@bg1, 0.75);
-
-    border: 1px solid @aqua;
-    border-radius: 14px;
-
-    padding: 2px 6px;
-    margin: 6px 4px;
-
-    min-height: 28px;
+    margin: 1px 0;
 }
 
 #workspaces button {
-    background: transparent;
-    color: @grey1;
-
-    border-radius: 10px;
-
+    color: @foreground;
+    border: none;
+    padding: 0 5px;
+}
+#workspaces button:hover {
+    color: @pink;
+    transition: none;
+    border-bottom: 1px solid @pink;
     padding: 0 8px;
-    margin: 2px;
-
-    min-width: 18px;
-    min-height: 18px;
-
-    transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active {
-    background: @blue;
-    color: @fg;
-
-    min-width: 50px;
-
-    transition: all 0.3s ease-in-out;
-
-    font-size: 13px;
-}
-
-#workspaces button:hover {
-    background: alpha(@aqua, 0.18);
-    color: @fg;
-
-    border-radius: 16px;
-
-    min-width: 50px;
+    color: @pink;
+    border: 2px solid @pink;
+    padding: 0 8px;
+    margin: 0 2px;
 }
 
 #workspaces button.urgent {
     background-color: @red;
-    color: @bg2;
-
-    border: 1px solid @fg;
-    border-radius: 16px;
-
-    min-width: 50px;
-
-    transition: all 0.3s ease-in-out;
+    padding: 0 8px;
 }
 
-/* Modules */
-
+#custom-power,
+#tray,
+#bluetooth,
+#network,
 #battery,
 #pulseaudio,
-#network,
-#bluetooth,
-#clock,
-#custom-notification,
-#tray {
-    background: alpha(@bg2, 0.88);
-
-    color: @fg;
-
-    border: 1px solid @aqua;
-    border-radius: 14px;
-
+#clock {
+    color: @foreground;
+    margin: 1px 0;
     padding: 0 10px;
-    margin: 6px 4px;
-
-    min-height: 28px;
 }
 
-/* Battery states */
+#custom-power:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#pulseaudio:hover,
+#clock:hover {
+    background-color: alpha(@select, 0.6);
+}
 
-#battery.charging,
-#battery.full {
+#bluetooth {
+    color: @yellow;
+}
+
+#network {
     color: @green;
 }
 
-#battery.warning,
-#battery.critical {
-    color: @red;
+#battery {
+    color: @purple;
 }
 
-/* Muted states */
+#pulseaudio {
+    color: @orange;
+}
 
-#network.disconnected,
-#tray {
-    color: @grey1;
+#clock {
+    margin-right: 10px;
+    color: @blue;
+}
+
+#custom-power {
+    margin-left: 10px;
+    padding: 0px 10px 0 15px;
 }
