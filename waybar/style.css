@@ -1,96 +1,49 @@
-/* @import "$HOME/.config/colors/colors.css" */
-@import "../colors/colors.css";
+@import "colors/macchiato.css";
 
 * {
-    font-family: "JetBrainsMono Nerd Font";
-    font-size: 13px;
-    font-weight: bold;
-    background-color: transparent;
-    border-radius: 5px;
-    min-height: 0;
+    all: unset;
+    font-family: "Iosevka Nerd Font Propo";
 }
 
-window,
-tooltip {
-    background-color: @background;
-}
-
-#waybar {
-    background: alpha(@background, 0.6);
-    border-radius: 0;
+window#waybar {
+    background: @base;
+    color: @text;
+    border-radius: 0 0 10px 10px;
 }
 
 #workspaces {
-    margin: 1px 0;
+    min-width: 100px;
+    font-size:0.4rem;
+    padding: 2px 4px;
+    margin: 11px 0;
+    border-radius: 99px;
 }
 
 #workspaces button {
-    color: @foreground;
-    border: none;
-    padding: 0 5px;
-}
-#workspaces button:hover {
-    color: @pink;
-    transition: none;
-    border-bottom: 1px solid @pink;
-    padding: 0 8px;
+    background-color: @overlay1;
+    color : transparent;
+    padding : 0px 5px;
+    border-radius : 99px;
+    margin : 0 2px;
+    min-width : 4px;
 }
 
 #workspaces button.active {
-    color: @pink;
-    border: 2px solid @pink;
-    padding: 0 8px;
-    margin: 0 2px;
+    background-color: @blue;
+    min-width: 1rem;
+    font-weight : 200;
+    transition : none;
 }
 
-#workspaces button.urgent {
-    background-color: @red;
-    padding: 0 8px;
+#clock,
+#clock#right{
+    margin: 0 15px;
+    font-weight: 700;
+    font-size: 1.12rem;
 }
-
-#custom-power,
-#tray,
-#bluetooth,
-#network,
-#battery,
-#pulseaudio,
-#clock {
-    color: @foreground;
-    margin: 1px 0;
-    padding: 0 10px;
+.modules-left {
+    margin-left: 8px;
 }
-
-#custom-power:hover,
-#bluetooth:hover,
-#network:hover,
-#battery:hover,
-#pulseaudio:hover,
-#clock:hover {
-    background-color: alpha(@select, 0.6);
-}
-
-#bluetooth {
-    color: @yellow;
-}
-
-#network {
-    color: @green;
-}
-
-#battery {
-    color: @purple;
-}
-
-#pulseaudio {
-    color: @orange;
-}
-
-#clock {
-    margin-right: 10px;
-    color: @blue;
-}
-
-#custom-power {
-    margin-left: 10px;
-    padding: 0px 10px 0 15px;
+.modules-right {
+    margin-right: 8px;
 }

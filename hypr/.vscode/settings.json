@@ -1,0 +1,6 @@
+{
+  "Lua.workspace.library": [
+    "/usr/share/hypr/stubs"
+  ],
+  "workbench.sideBar.location": "left"
+}

@@ -1,3 +1,103 @@
-@import 'colors/dracula.css';
-@import 'themes/nova-dark/notifications.css';
-@import 'themes/nova-dark/central_control.css';
+@define-color base #24273a;
+@define-color mantle #1e2030;
+@define-color crust #181926;
+
+@define-color surface0 #363a4f;
+@define-color surface1 #494d64;
+
+@define-color text #cad3f5;
+@define-color subtext #b8c0e0;
+
+@define-color blue #8aadf4;
+@define-color red #ed8796;
+@define-color green #a6da95;
+@define-color yellow #eed49f;
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+.control-center {
+    background: alpha(@base, .92);
+    border: 2px solid alpha(@blue, .30);
+    border-radius: 18px;
+    color: @text;
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+.widget-title {
+    color: @text;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 16px;
+}
+
+.widget-title button {
+    background: @surface0;
+    color: @text;
+    border-radius: 12px;
+}
+
+.widget-title button:hover {
+    background: @blue;
+    color: @base;
+}
+
+.widget-dnd {
+    padding: 12px;
+}
+
+.notification {
+    background: @mantle;
+    border-radius: 16px;
+    margin: 10px;
+    padding: 14px;
+    border: 1px solid alpha(@blue,.25);
+}
+
+.notification:hover {
+    background: @surface0;
+}
+
+.notification-content {
+    color: @text;
+}
+
+.summary {
+    color: @text;
+    font-weight: bold;
+}
+
+.body {
+    color: @subtext;
+}
+
+.image {
+    border-radius: 12px;
+}
+
+.close-button {
+    background: @red;
+    color: @base;
+    border-radius: 100%;
+}
+
+.close-button:hover {
+    background: #f5a97f;
+}
+
+.notification.critical {
+    border: 2px solid @red;
+}
+
+.notification.low {
+    opacity: .85;
+}
+
+.notification-default-action:hover {
+    background: alpha(@blue,.12);
+}

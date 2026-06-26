@@ -1,0 +1,36 @@
+{
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 15,
+
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+
+    "editor.renderWhitespace": "selection",
+    "editor.smoothScrolling": true,
+
+    "editor.guides.bracketPairs": true,
+
+    "breadcrumbs.enabled": false,
+
+    "explorer.confirmDelete": false,
+
+    "window.titleBarStyle": "custom",
+
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "terminal.integrated.defaultProfile.linux": "fish",
+
+    "workbench.startupEditor": "none",
+
+    "git.enableSmartCommit": true,
+
+    "files.autoSave": "afterDelay",
+
+    "editor.stickyScroll.enabled": false
+}
