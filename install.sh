@@ -55,8 +55,13 @@ cp -r nvim ~/.config/
 chmod +x ~/.config/rofi/*
 chmod +x ~/.config/waybar/*
 
+mkdir -p ~/.local/bin/
 
 mkdir -p ~/Pictures
 cp -r Wallpapers ~/Pictures/ 
 
-awww img "Wallpapers/Otama.png"
+mkdir -p ~/.local/bin
+cp wallpaper.sh ~/.local/bin/
+chmod +x ~/.local/bin/wallpaper.sh
+
+awww img ~/Picture/Wallpapers/Otama.png

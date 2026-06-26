@@ -17,6 +17,10 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))                 
 hl.bind(mainMod .." + Print",hl.dsp.exec_cmd('mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date` +%Y-%m-%d).png'))
 hl.bind(mainMod .. " + S",hl.dsp.exec_cmd('mkdir -p ~/Pictures/Screenshots && FILE=~/Pictures/Screenshots/$(date "+%Y-%m-%d_%H-%M-%S").png && grim -g "$(slurp -d)" "$FILE" && wl-copy < "$FILE"'))
 ----------------------------------------------------------------------------------------------
+-- Wallpaper changer
+hl.bind(mainMod .." + W", hl.dsp.exec_cmd("~/.local/bin/wallpaper.sh rofi"))
+hl.bind(mainMod .." + Tab",hl.dsp.exec_cmd("~/.local/bin/wallpaper.sh random"))
+
 -- Flatpak items
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flatpak run com.brave.Browser"))      -- brave 
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("flatpak run com.visualstudio.code"))  -- VS Code
