@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "$0")"
 
 sudo pacman -S --needed base-devel \
         sddm \
@@ -17,7 +20,7 @@ sudo pacman -S --needed base-devel \
         waybar \
         swaync \
 	libnotify \
-        awww \
+        swww \
         fastfetch \
 	ttf-jetbrains-mono-nerd \
         grim \
@@ -32,10 +35,11 @@ sudo systemctl enable sddm
 
 # -------------- Yay -----------------------------
 if ! command -v yay &>/dev/null; then
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
+    [ -d ~/yay ] && rm -rf ~/yay
+    git clone https://aur.archlinux.org/yay.git ~/yay
+    cd ~/yay
     makepkg -si --noconfirm
-    cd ..
+    cd -
 fi
 
 # ------------ Yay Packages------------------------
@@ -45,14 +49,14 @@ yay -S --needed \
 
 flatpak install -y flathub com.brave.Browser
 
-flatpak install -y flathub com.visualstudio.code 
+flatpak install -y flathub com.visualstudio.code
 
 # -------------- Copy the folders -----------------
 
 mkdir -p ~/.config/hyprland-backup
 
-for dir in hypr kitty waybar rofi swaync nvim do
-    [ -d ~/.config/$dir ] && mv ~/.config/$dir ~/.config/hyprland-backup/
+for dir in hypr kitty waybar rofi swaync nvim; do
+    [ -d ~/.config/"$dir" ] && mv ~/.config/"$dir" ~/.config/hyprland-backup/
 done
 
 cp -r hypr ~/.config/
@@ -65,17 +69,17 @@ cp -r nvim ~/.config/
 chmod +x ~/.config/rofi/*
 chmod +x ~/.config/waybar/*
 
-awww-daemon &
-
 mkdir -p ~/Pictures
-cp -r Wallpapers ~/Pictures/ 
+cp -r Wallpapers ~/Pictures/
 
 mkdir -p ~/.local/bin
 cp wallpaper.sh ~/.local/bin/
 chmod +x ~/.local/bin/wallpaper.sh
 
-
-echo "System Will Reboot for applying "
-
-
-reboot
+echo "Setup complete. System will reboot to apply changes."
+read -p "Reboot now? [Y/n] " confirm
+if [[ "$confirm" =~ ^[Nn]$ ]]; then
+    echo "Skipping reboot. Reboot manually when ready."
+else
+    reboot
+fi
