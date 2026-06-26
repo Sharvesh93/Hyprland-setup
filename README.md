@@ -155,8 +155,8 @@ Utilities
 
 | Shortcut | Action |
 |-----------|--------|
-| `SUPER + Enter` | Open Terminal |
-| `SUPER + D` | Open Rofi |
+| `SUPER + T` | Open Terminal |
+| `SUPER + Space` | Open Rofi |
 | `SUPER + Q` | Close Active Window |
 | `SUPER + F` | Toggle Fullscreen |
 | `SUPER + Shift + Q` | Exit Hyprland |
