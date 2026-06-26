@@ -39,7 +39,7 @@ Featuring a minimal workflow with **Waybar**, **Rofi**, **Kitty**, **Ghostty**, 
 
 > **Notifications**
 
-![Notifications](screenshots/notifications.png)
+![Notifications](screenshots/gi.png)
 
 ---
 

@@ -11,13 +11,27 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))                           
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/waybar/launch.sh"))         -- Wayvar
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))                           -- Hyprlock
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))                   -- Swaync || notification center 
+
+
+hl.bind(
+    "XF86MonBrightnessUp",
+    hl.dsp.exec_cmd("brightnessctl set 5%+"),
+    { locked = true, repeating = true }
+)
+
+hl.bind(
+    "XF86MonBrightnessDown",
+    hl.dsp.exec_cmd("brightnessctl set 5%-"),
+    { locked = true, repeating = true }
+)
+
 -- ---------------------------------------------------------------------------------------------
 
 -- Screenshots
 hl.bind(mainMod .." + Print",hl.dsp.exec_cmd('mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date` +%Y-%m-%d).png'))
 hl.bind(mainMod .. " + S",hl.dsp.exec_cmd('mkdir -p ~/Pictures/Screenshots && FILE=~/Pictures/Screenshots/$(date "+%Y-%m-%d_%H-%M-%S").png && grim -g "$(slurp -d)" "$FILE" && wl-copy < "$FILE"'))
 ----------------------------------------------------------------------------------------------
--- Wallpaper changer
+
 hl.bind(mainMod .." + W", hl.dsp.exec_cmd("~/.local/bin/wallpaper.sh rofi"))
 hl.bind(mainMod .." + Tab",hl.dsp.exec_cmd("~/.local/bin/wallpaper.sh random"))
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 sudo pacman -S --needed base-devel \
-        git \
+        sddm \
+        hyprland \
+	git \
 	neovim \
 	fzf \
         kitty \
@@ -25,6 +27,9 @@ sudo pacman -S --needed base-devel \
         nwg-look \
         gnome-themes-extra \
 	tlp
+
+sudo systemctl enable sddm
+
 # -------------- Yay -----------------------------
 if ! command -v yay &>/dev/null; then
     git clone https://aur.archlinux.org/yay.git
