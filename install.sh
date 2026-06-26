@@ -26,7 +26,7 @@ sudo pacman -S --needed base-devel \
 	hyprlock \
         nwg-look \
         gnome-themes-extra \
-	tlp
+	tlp --noconfirm
 
 sudo systemctl enable sddm
 
@@ -41,7 +41,12 @@ fi
 # ------------ Yay Packages------------------------
 
 yay -S --needed \
-    ttf-iosevka-nerd 
+    ttf-iosevka-nerd --noconfirm --answerdiff=None --answeredit=None
+
+flatpak install -y flathub com.brave.Browser
+
+flatpak install -y flathub com.visualstudio.code 
+
 # -------------- Copy the folders -----------------
 
 mkdir -p ~/.config/hyprland-backup
@@ -60,7 +65,7 @@ cp -r nvim ~/.config/
 chmod +x ~/.config/rofi/*
 chmod +x ~/.config/waybar/*
 
-mkdir -p ~/.local/bin/
+awww-daemon &
 
 mkdir -p ~/Pictures
 cp -r Wallpapers ~/Pictures/ 
@@ -69,4 +74,8 @@ mkdir -p ~/.local/bin
 cp wallpaper.sh ~/.local/bin/
 chmod +x ~/.local/bin/wallpaper.sh
 
-awww img ~/Picture/Wallpapers/Otama.png
+
+echo "System Will Reboot for applying "
+
+
+reboot
