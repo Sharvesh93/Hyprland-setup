@@ -1,0 +1,32 @@
+/* Midnight Blue - Based on your wallpaper */
+
+@define-color rosewater #d9e2ff;
+@define-color flamingo  #cfd9ff;
+@define-color pink      #95a6ff;
+@define-color mauve     #7d91ff;
+@define-color red       #7f9cff;
+@define-color maroon    #6d88f2;
+@define-color peach     #5f7be8;
+@define-color yellow    #9fb8ff;
+@define-color green     #8fb6ff;
+@define-color teal      #77a8ff;
+@define-color sky       #7cb6ff;
+@define-color blue #6C82FF;
+@define-color lavender #9AA9FF;
+@define-color sapphire #5C74F5;
+
+@define-color text      #E3E9FF;
+@define-color subtext1  #BBC5E9;
+@define-color subtext0  #9EAAD3;
+
+@define-color overlay2  #707A9D;
+@define-color overlay1  #56607F;
+@define-color overlay0  #39425D;
+
+@define-color surface2  #2A3150;
+@define-color surface1  #1B2342;
+@define-color surface0  #111A36;
+
+@define-color base    #0A1024;
+@define-color mantle  #060A18;
+@define-color crust   #02040C;
