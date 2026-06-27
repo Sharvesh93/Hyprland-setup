@@ -72,10 +72,6 @@ chmod +x ~/.config/waybar/*
 mkdir -p ~/Pictures
 cp -r Wallpapers ~/Pictures/
 
-mkdir -p ~/.local/bin
-cp wallpaper.sh ~/.local/bin/
-chmod +x ~/.local/bin/wallpaper.sh
-
 echo "Setup complete. System will reboot to apply changes."
 read -p "Reboot now? [Y/n] " confirm
 if [[ "$confirm" =~ ^[Nn]$ ]]; then

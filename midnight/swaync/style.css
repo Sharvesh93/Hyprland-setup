@@ -1,0 +1,386 @@
+
+
+@define-color base-bg        #070B17E6; 
+@define-color surface        #0D1325F2;
+@define-color surface-alt    #121B33F2;
+@define-color border-col     #223A73;
+@define-color glow-col       #4F7DFF55;
+
+@define-color accent         #4F7DFF;
+@define-color accent-hover   #5E8CFF;
+@define-color accent-active  #709BFF;
+
+@define-color text-primary   #F4F6FF;
+@define-color text-secondary #9AA9D5;
+@define-color text-disabled  #657298;
+@define-color urgent         #FF5C7A;
+
+* {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
+    transition: 180ms ease;
+}
+
+/* ----------------------------------------------------------------
+ * Notification window / floating widget root
+ * ---------------------------------------------------------------- */
+.notification-row {
+    margin: 6px;
+}
+
+.notification-background {
+    background: transparent;
+}
+
+.notification {
+    border-radius: 14px;
+    padding: 10px;
+}
+
+.notification-content {
+    padding: 4px 6px;
+}
+
+.notification-default-action,
+.notification-action {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 12px;
+    color: @text-primary;
+    padding: 6px 10px;
+    margin: 4px 4px 0 0;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+    background: @surface-alt;
+    border-color: @accent;
+    color: @text-primary;
+}
+.notification-group {
+    min-height: 0;
+}
+
+.control-center {
+    border-radius: 18px;
+    padding: 12px;
+}
+.notifications-box {
+    max-height: 180px;
+}
+
+.notification .summary {
+    color: @text-primary;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.notification .time {
+    color: @text-disabled;
+    font-size: 11px;
+}
+
+.notification .body {
+    color: @text-secondary;
+    font-size: 12.5px;
+}
+
+.notification.critical {
+    border-color: @urgent;
+}
+
+.notification.critical .summary {
+    color: @urgent;
+}
+
+.close-button {
+    background: @surface-alt;
+    color: @text-secondary;
+    border-radius: 999px;
+    min-width: 22px;
+    min-height: 22px;
+    margin: 4px;
+}
+
+.close-button:hover {
+    background: @urgent;
+    color: @text-primary;
+}
+
+.image {
+    border-radius: 12px;
+}
+
+.progress-bar {
+    background: @surface-alt;
+    border-radius: 999px;
+    min-height: 6px;
+}
+
+.progress-bar-instance .progress-bar {
+    border-radius: 999px;
+}
+
+.progress-bar-instance progress {
+    background: @accent;
+    border-radius: 999px;
+}
+
+/* ----------------------------------------------------------------
+ * Control Center panel
+ * ---------------------------------------------------------------- */
+.control-center {
+    background: @base-bg;
+    border: 1px solid @border-col;
+    border-radius: 22px;
+    margin: 10px;
+    padding: 14px;
+    box-shadow: 0px 10px 36px rgba(0, 0, 0, 0.6);
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+.control-center-list-placeholder {
+    color: @text-disabled;
+    font-size: 13px;
+}
+
+.widget-title {
+    color: @text-primary;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 4px 6px 10px 6px;
+}
+
+.widget-title > button {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 10px;
+    color: @text-secondary;
+    padding: 4px 10px;
+}
+
+.widget-title > button:hover {
+    border-color: @accent;
+    color: @text-primary;
+}
+
+/* ----------------------------------------------------------------
+ * DnD toggle widget
+ * ---------------------------------------------------------------- */
+.widget-dnd {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 14px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    color: @text-secondary;
+}
+
+.widget-dnd > switch {
+    background: @surface-alt;
+    border: 1px solid @border-col;
+    border-radius: 999px;
+    min-width: 38px;
+    min-height: 20px;
+}
+
+.widget-dnd > switch:checked {
+    background: @accent;
+    border-color: @accent;
+}
+
+.widget-dnd > switch slider {
+    background: @text-primary;
+    border-radius: 999px;
+}
+
+/* ----------------------------------------------------------------
+ * Label / title widget (e.g. "Notifications")
+ * ---------------------------------------------------------------- */
+.widget-label {
+    color: @text-primary;
+    font-weight: 600;
+    padding: 4px 6px;
+}
+
+.widget-label > button {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 10px;
+    color: @text-secondary;
+    padding: 4px 10px;
+}
+
+.widget-label > button:hover {
+    border-color: @accent;
+    color: @text-primary;
+}
+
+/* ----------------------------------------------------------------
+ * Mpris (media player) widget
+ * ---------------------------------------------------------------- */
+.widget-mpris {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 16px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.widget-mpris-player {
+    color: @text-primary;
+}
+
+.widget-mpris-title {
+    color: @text-primary;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.widget-mpris-subtitle {
+    color: @text-secondary;
+    font-size: 11.5px;
+}
+
+.widget-mpris > button,
+.widget-mpris-player > button {
+    background: @surface-alt;
+    border: 1px solid @border-col;
+    border-radius: 999px;
+    color: @text-primary;
+    min-width: 30px;
+    min-height: 30px;
+    margin: 0 3px;
+}
+
+.widget-mpris > button:hover,
+.widget-mpris-player > button:hover {
+    background: @accent;
+    border-color: @accent;
+}
+
+/* ----------------------------------------------------------------
+ * Volume / brightness slider widgets
+ * ---------------------------------------------------------------- */
+.widget-volume,
+.widget-backlight {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 16px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    color: @text-secondary;
+}
+
+.widget-volume > box > button,
+.widget-backlight > box > button {
+    background: @surface-alt;
+    border-radius: 999px;
+    color: @text-primary;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+.widget-volume > box > button:hover,
+.widget-backlight > box > button:hover {
+    background: @accent;
+}
+
+scale {
+    margin: 4px 0;
+}
+
+scale trough {
+    background: @surface-alt;
+    border-radius: 999px;
+    min-height: 8px;
+}
+
+scale highlight {
+    background: @accent;
+    border-radius: 999px;
+}
+
+scale slider {
+    background: @text-primary;
+    border-radius: 999px;
+    min-width: 14px;
+    min-height: 14px;
+    margin: -4px;
+}
+
+/* ----------------------------------------------------------------
+ * Buttons grid widget (quick toggles e.g. wifi / bluetooth)
+ * ---------------------------------------------------------------- */
+.widget-buttons-grid {
+    background: transparent;
+    padding: 4px 0;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background: @surface;
+    border: 1px solid @border-col;
+    border-radius: 14px;
+    color: @text-secondary;
+    padding: 10px;
+    margin: 4px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    border-color: @accent;
+    color: @text-primary;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+    background: @accent;
+    border-color: @accent;
+    color: @text-primary;
+}
+
+/* ----------------------------------------------------------------
+ * Menu widget (right-click / overflow menus)
+ * ---------------------------------------------------------------- */
+menu, menuitem {
+    background: @surface-alt;
+    border: 1px solid @border-col;
+    border-radius: 12px;
+    color: @text-secondary;
+    padding: 6px;
+}
+
+menuitem:hover {
+    background: @accent;
+    color: @text-primary;
+}
+
+/* ----------------------------------------------------------------
+ * Scrollbar — kept thin & subtle
+ * ---------------------------------------------------------------- */
+scrollbar {
+    background: transparent;
+}
+
+scrollbar slider {
+    background: @border-col;
+    border-radius: 999px;
+    min-width: 6px;
+}
+
+scrollbar slider:hover {
+    background: @accent;
+}
+
+/* ----------------------------------------------------------------
+ * Tooltip
+ * ---------------------------------------------------------------- */
+tooltip {
+    background: @surface-alt;
+    border: 1px solid @border-col;
+    border-radius: 10px;
+    color: @text-primary;
+    padding: 6px 10px;
+}

@@ -1,0 +1,188 @@
+/**
+ * ============================================================
+ *  Midnight Drift — Rofi Theme
+ *  A calm, cinematic launcher for deep navy / soft-glow setups
+ *  Designed for: Hyprland 0.55+, Rofi (modern syntax), drun mode
+ * ============================================================
+ */
+
+* {
+    /* ----------------------------------------------------------
+     * Palette — strictly midnight blue, no foreign hues
+     * ---------------------------------------------------------- */
+    base-bg: #060A18F5;/* ~90% opacity = ~10-12% transparency on top of blur */
+    surface:        #0D1325F2;
+    surface-alt:    #121B33F2;
+    border-col:      #2D437AFF;
+    
+    accent: #7096FF;
+    accent-hover: #81A5FF;
+    accent-selected: #88ABFF;
+
+    text-primary:    #F4F6FFFF;
+    text-secondary:  #9AA9D5FF;
+    text-disabled:   #657298FF;
+    urgent:          #FF5C7AFF;
+
+    transparent:     #00000000;
+
+    /* ----------------------------------------------------------
+     * Typography
+     * ---------------------------------------------------------- */
+    font: "JetBrainsMono Nerd Font Medium 11";
+
+    background-color: @transparent;
+    text-color:       @text-primary;
+}
+
+/* ================================================================
+ *  ROOT WINDOW
+ *  Small floating, centered, glassy, large rounded corners
+ * ================================================================ */
+window {
+    width:              500px;
+    height:             360px;
+    location:           center;
+    anchor:             center;
+    x-offset:           0px;
+    y-offset:           0px;
+
+    background-color:  @base-bg;
+    border:             1.4px;
+    border-color:       @border-col;
+    border-radius:      24px;
+
+    /* Note: Rofi's theming language has no box-shadow property.
+       The "glow" look is instead achieved with the border width/color
+       above, plus a real shadow + blur applied by Hyprland's
+       compositor on the rofi window (see windowrule snippet below). */
+
+    padding:            22px;
+}
+
+/* ================================================================
+ *  MAIN LAYOUT
+ * ================================================================ */
+mainbox {
+    background-color: @transparent;
+    children:          [ inputbar, message, listview ];
+    spacing:            16px;
+    padding:            0px;
+}
+
+/* ================================================================
+ *  SEARCH BOX — pill shape, soft glow on focus
+ * ================================================================ */
+inputbar {
+    background-color: @surface;
+    text-color:        @text-primary;
+    border:            1px;
+    border-color:      @border-col;
+    border-radius:     999px;     /* full pill */
+    padding:           14px 22px;
+    spacing:           10px;
+    children:          [ prompt, entry ];
+}
+
+inputbar selected {
+    border-color:      @accent;
+    background-color:  @surface-alt;
+}
+
+prompt {
+    background-color: @transparent;
+    text-color:        @text-secondary;
+    vertical-align:     0.5;
+}
+
+entry {
+    background-color: @transparent;
+    text-color:        @text-primary;
+    placeholder:       "Search applications…";
+    placeholder-color: @text-disabled;
+    cursor:             text;
+    vertical-align:     0.5;
+}
+
+/* ================================================================
+ *  STATUS / MESSAGE (used for error states, e.g. no results)
+ * ================================================================ */
+message {
+    background-color: @transparent;
+    border:            0px;
+    padding:           2px 10px;
+}
+
+textbox {
+    background-color: @transparent;
+    text-color:        @text-secondary;
+}
+
+/* ================================================================
+ *  APPLICATION LIST
+ * ================================================================ */
+listview {
+    background-color:  @transparent;
+    columns:            1;
+    lines:              8;
+    spacing:            8px;
+    fixed-height:       true;
+    dynamic:            true;
+    scrollbar:          false;
+    padding:            4px 0px 0px 0px;
+}
+
+element {
+    background-color:  @transparent;
+    text-color:         @text-secondary;
+    border-radius:      14px;
+    padding:            9px 14px;
+    spacing:            12px;
+    orientation:        horizontal;
+}
+
+element normal.normal {
+    background-color:  @transparent;
+    text-color:         @text-secondary;
+}
+
+element normal.urgent {
+    background-color:  @transparent;
+    text-color:         @urgent;
+}
+
+/* Smooth, elegant hover — not flashy */
+element alternate.normal {
+    background-color:  @transparent;
+    text-color:         @text-secondary;
+}
+
+element selected.normal {
+    background-color: #172753F2;
+    text-color: @text-primary;
+    border: 0px;
+    border-radius: 14px;
+}
+
+element selected.urgent {
+    background-color:  @surface-alt;
+    text-color:         @urgent;
+    border:             1px;
+    border-color:       @urgent;
+    border-radius:      14px;
+}
+
+/* ----------------------------------------------------------------
+ * Icons — Adwaita, medium size, evenly aligned
+ * ---------------------------------------------------------------- */
+element-icon {
+    size:               30px;
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
+}
+
+element-text {
+    text-color:         inherit;
+    vertical-align:     0.5;
+    horizontal-align:   0.0;
+}

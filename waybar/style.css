@@ -1,4 +1,4 @@
-@import "colors/macchiato.css";
+@import "colors/midnight-blue.css";
 
 * {
     all: unset;
@@ -6,9 +6,12 @@
 }
 
 window#waybar {
-    background: @base;
+    background: alpha(@base, 0.75);
     color: @text;
-    border-radius: 0 0 10px 10px;
+
+    border-radius: 0 0 14px 14px;
+
+    border: 1px solid alpha(@blue, 0.15);
 }
 
 #workspaces {
@@ -46,4 +49,10 @@ window#waybar {
 }
 .modules-right {
     margin-right: 8px;
+}
+
+#cava {
+    margin : 0 12px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
 }
