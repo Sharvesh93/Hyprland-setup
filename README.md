@@ -5,7 +5,7 @@
 A clean, modern, and modular **Hyprland** dotfiles configuration for **Arch Linux**.
 
 Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
-
+[demo.mp4](assets/demo.mp4)
 <!-- Badges: replace the repo URL placeholders below once published -->
 ![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-58E1FF?style=for-the-badge&logo=wayland&logoColor=white)
@@ -33,14 +33,14 @@ Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **
 <details>
 <summary><strong>Terminal</strong></summary>
 
-![Terminal](screenshots/terminal.png)
+![Terminal](screenshots/Terminal.png)
 
 </details>
 
 <details>
 <summary><strong>Application Launcher</strong></summary>
 
-![Launcher](screenshots/launcher.png)
+![Launcher](screenshots/Launcher.png)
 
 </details>
 
@@ -59,7 +59,7 @@ Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **
 
 - 🪟 **Hyprland** — modular, Lua-based configuration split across logical files (keybindings, animations, monitors, input, window rules, etc.)
 - 📊 **Waybar** — custom status bar with its own colors and styling
-- 💻 **Kitty** — configured terminal emulator
+- 💻 **Kitty** — configured Terminal emulator
 - 🐟 **Fish** — shell configuration with custom functions, completions, and themes
 - 🚀 **Rofi** — application launcher with a custom theme
 - 🔔 **SwayNC** — notification center with custom styling
@@ -80,7 +80,7 @@ Hyprland-setup/
 ├── config/
 │   ├── fish/         # Fish shell config, functions, completions, themes
 │   ├── hypr/          # Hyprland config (modular Lua), hyprlock.conf, helper scripts
-│   ├── kitty/         # Kitty terminal configuration
+│   ├── kitty/         # Kitty Terminal configuration
 │   ├── nvim/          # Neovim configuration (Lua-based)
 │   ├── rofi/          # Rofi launcher config and theme
 │   ├── swaync/        # SwayNC notification center config and styling
@@ -102,7 +102,7 @@ Hyprland-setup/
 |------|-------------|
 | `config/hypr/` | Core Hyprland configuration, split into modules (`monitor.lua`, `keybindings.lua`, `animations.lua`, `input.lua`, `window.lua`, `window_rule.lua`, `look.lua`, `env.lua`, `misc.lua`, `autostart.lua`), plus `hyprlock.conf` and helper shell scripts |
 | `config/waybar/` | Waybar configuration (`config.jsonc`), styling (`style.css`), color definitions, and a launch script |
-| `config/kitty/` | Kitty terminal configuration |
+| `config/kitty/` | Kitty Terminal configuration |
 | `config/fish/` | Fish shell config, functions, completions, plugins, and themes |
 | `config/rofi/` | Rofi configuration and `.rasi` theme |
 | `config/swaync/` | SwayNC configuration and styling |
@@ -210,8 +210,8 @@ This setup is designed to be modified. Common customization points include:
 <!-- TODO: Add or update screenshots as the setup evolves -->
 
 ![Desktop](screenshots/Desktop.png)
-![Terminal](screenshots/terminal.png)
-![Launcher](screenshots/launcher.png)
+![Terminal](screenshots/Terminal.png)
+![Launcher](screenshots/Launcher.png)
 ![Notification Center](screenshots/notification-center.png)
 
 ---
