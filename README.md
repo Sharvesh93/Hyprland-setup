@@ -5,7 +5,6 @@
 A clean, modern, and modular **Hyprland** dotfiles configuration for **Arch Linux**.
 
 Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
-[demo.mp4](assets/demo.mp4)
 <!-- Badges: replace the repo URL placeholders below once published -->
 ![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-58E1FF?style=for-the-badge&logo=wayland&logoColor=white)
