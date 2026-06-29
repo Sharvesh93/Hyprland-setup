@@ -14,6 +14,9 @@ echo "Installing configs..."
 echo "Installing wallpapers..."
 ./scripts/install-wallpapers.sh
 
+echo "Installing Silent SDDM theme..."
+./scripts/install-sddm.sh
+
 echo "Done."
 
 chmod +x ~/.config/rofi/*
