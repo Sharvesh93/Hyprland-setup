@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-backup="$HOME/.config-backup-$(date +%F-%H%M)"
+set -e
 
-mkdir -p "$backup"
+BACKUP_DIR="$HOME/.config-backup/$(date +%Y-%m-%d_%H-%M-%S)"
 
-for dir in hypr waybar kitty fish rofi swaync nvim
-do
+mkdir -p "$BACKUP_DIR"
+
+for dir in hypr waybar rofi kitty fish nvim swaync; do
     if [ -d "$HOME/.config/$dir" ]; then
-        mv "$HOME/.config/$dir" "$backup/"
+        cp -r "$HOME/.config/$dir" "$BACKUP_DIR/"
+        echo "Backed up $dir"
     fi
 done

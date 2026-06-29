@@ -41,3 +41,9 @@ yay -S --needed \
 
 flatpak install -y flathub com.brave.Browser
 flatpak install -y flathub com.visualstudio.code
+
+fish -c "
+curl -sL https://git.io/fisher | source
+and fisher install jorgebucaran/fisher
+and fisher install IlanCosman/tide@v6
+"
