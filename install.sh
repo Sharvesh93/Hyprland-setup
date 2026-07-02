@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+chmod +x ./scripts/*.sh 
+
+if [ "$EUID" -eq 0 ]; then
+    echo "Do not run this installer with sudo."
+    exit 1
+fi
+
 set -e
 
 echo "Installing packages..."
