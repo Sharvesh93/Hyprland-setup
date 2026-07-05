@@ -3,10 +3,6 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-################################################################################
-# Functions
-################################################################################
-
 log() {
     printf "\n\033[1;34m==>\033[0m %s\n" "$1"
 }
@@ -22,10 +18,6 @@ cleanup() {
 
 trap cleanup EXIT
 
-################################################################################
-# Checks
-################################################################################
-
 [[ -f /etc/arch-release ]] || error "This script is intended for Arch Linux."
 
 ping -c1 archlinux.org >/dev/null 2>&1 || error "No internet connection."
@@ -40,9 +32,7 @@ PACMAN_PACKAGES=(
     base-devel
     git
     neovim
-    fzf
-    fish
-
+    bat
     hyprland
     kitty
     rofi
@@ -52,13 +42,18 @@ PACMAN_PACKAGES=(
     grim
     slurp
     wl-clipboard
-
+    eza
     pipewire
     pipewire-pulse
 
+    fish 
+    fd
+    yazi
+    fzf
     flatpak
-
+    zsh
     firefox
+
     nautilus
     nwg-look
     gnome-themes-extra
@@ -66,10 +61,8 @@ PACMAN_PACKAGES=(
     ttf-jetbrains-mono-nerd
 
     tlp
-
-    waypaper
-    mpvpaper
-
+    # waypaper
+    # mpvpaper
     libnotify
 )
 
@@ -82,10 +75,6 @@ FLATPAK_PACKAGES=(
     com.visualstudio.code
 )
 
-################################################################################
-# Pacman
-################################################################################
-
 log "Updating system and installing pacman packages..."
 
 sudo pacman -Syu \
@@ -93,9 +82,6 @@ sudo pacman -Syu \
     --noconfirm \
     "${PACMAN_PACKAGES[@]}"
 
-################################################################################
-# yay
-################################################################################
 
 if ! command -v yay &>/dev/null; then
     log "Installing yay..."
@@ -143,25 +129,6 @@ flatpak install \
     -y \
     flathub \
     "${FLATPAK_PACKAGES[@]}"
-
-################################################################################
-# Fisher + Tide
-################################################################################
-
-log "Installing Fisher and Tide..."
-
-fish <<'EOF'
-
-if not functions -q fisher
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
-    fisher install jorgebucaran/fisher
-end
-
-if not fisher list | grep -q "IlanCosman/tide"
-    fisher install IlanCosman/tide@v6
-end
-
-EOF
 
 ################################################################################
 # Enable Services

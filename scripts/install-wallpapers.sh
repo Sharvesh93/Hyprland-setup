@@ -9,3 +9,5 @@ echo "Installing wallpapers..."
 mkdir -p ~/Pictures/Wallpapers
 
 cp -r "$SCRIPT_DIR/Wallpapers/"* ~/Pictures/Wallpapers/
+
+mv wallpapers.sh ~/.local/bin/wallpapers.sh

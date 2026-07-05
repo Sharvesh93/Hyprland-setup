@@ -1,0 +1,1 @@
+/home/sharvesh/.config/matugen/generated/palette.lua

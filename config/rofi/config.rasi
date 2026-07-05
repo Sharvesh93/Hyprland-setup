@@ -1,29 +1,8 @@
-
-
 configuration {
-    
-    modi:                       "drun";
+	modi:                       "drun";
     show-icons:                 true;
-    icon-theme:                 "Adwaita";
-    display-drun:               "Apps";
-
-    /* Search feel */
-    case-sensitive:              false;
-    sort:                        true;
-    sorting-method:              "fzf";
-    matching:                    "fuzzy";
-
-    /* Behavior polish */
-    drun-display-format:         "{name}";
-    cycle:                       true;
-    hover-select:                true;
-
-    /* Disable elements not used in this minimal design */
-    disable-history:             false;
-    sidebar-mode:                false;
-
-    /* Font */
-    font:                        "JetBrainsMono Nerd Font 11";
+    display-drun:               "Applications";
+	drun-display-format:        "{name}";
 }
 
-@theme "theme.rasi"
+@theme "~/.config/matugen/generated/rofi.rasi"

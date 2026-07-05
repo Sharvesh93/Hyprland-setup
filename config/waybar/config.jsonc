@@ -1,6 +1,10 @@
 {
     "layer": "top",
-    "width":1000,
+    "position": "top",
+    "margin-top": 5,
+    "width" : 1200,
+    "margin-left": 15,
+    "margin-right": 15,
     "modules-left": [
         "pulseaudio",
         "cava"
@@ -8,7 +12,8 @@
     "modules-center": [
         "clock",
         "hyprland/workspaces",
-        "clock#right"
+        "cpu",
+        "memory"
     ],
     "modules-right": [
         "network",
@@ -35,7 +40,7 @@
         "framerate": 30,
         "autosens": 0,
         "sensitivity": 0.1,
-        "bars": 20,
+        "bars": 14,
         "lower_cutoff_freq": 50,
         "higher_cutoff_freq": 10000,
         "hide_on_silence": false,
@@ -57,28 +62,31 @@
 
     // -------------- Modules Center --------------
     "clock": {
-        "format": "{:%H}" 
-    },
-    "clock#right" : {
-        "format" : "{:%M}"
+        "format": "{:%H : %M}" 
     },
     "hyprland/workspaces": {
-      "format": "{icon}",
-      "on-click": "activate",
-      "format-icons": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": "",
-        "5": "",
-        "6": "",
-        "7": "",
-        "8": "",
-        "9": "",
-        "10": ""
-      }
+    "format": "{icon}",
+    "format-icons": {
+        "active": "●",
+        "default": "○"
     },
-
+        "on-click": "activate",
+        "sort-by-number": true,
+        "disable-scroll": false,
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "cpu": {
+        "interval": 10,
+        "format": "{}% ",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 30,
+        "format": "  {}% ",
+        "max-length": 10
+    },
     // ------------- Modules Right -----------------
     "battery": {
         "states": {

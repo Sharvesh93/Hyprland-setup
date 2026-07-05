@@ -11,8 +11,8 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))                           
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/waybar/launch.sh"))         -- Wayvar
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))                           -- Hyprlock
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))                   -- Swaync || notification center 
-hl.bind(mainMod .. " + B ", hl.dsp.exec_cmd("~/.local/bin/screenrecord.sh"))            -- Screen Recorder
-hl.bind(mainMod .. " + H ", hl.dsp.exec_cmd("~/.config/rofi/help-bindings.sh"))            -- Help Script
+hl.bind(mainMod .. " + B ", hl.dsp.exec_cmd("~/.local/bin/screenrecord.sh"))      -- Screen Recorder
+hl.bind(mainMod .. " + H ", hl.dsp.exec_cmd("bash ~/check.sh"))                   -- Screen Recorder
 
 hl.bind(
     "XF86MonBrightnessUp",

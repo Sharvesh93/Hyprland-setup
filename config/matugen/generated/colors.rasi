@@ -1,0 +1,11 @@
+* {
+    background: #121318;
+    surface: #121318;
+    on_background: #e3e1e9;
+    on_surface: #e3e1e9;
+    primary: #b5c4ff;
+    on_primary: #1c2d61;
+    outline: #8f909a;
+    border: #45464f;
+    error: #ffb4ab;
+}

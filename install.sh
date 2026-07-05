@@ -24,6 +24,9 @@ echo "Installing wallpapers..."
 echo "Installing Silent SDDM theme..."
 ./scripts/install-sddm.sh
 
+echo "Installing zsh configuration..."
+cp ./scripts/.zshrc ~/.zshrc
+
 echo "Done."
 
 chmod +x ~/.config/rofi/*

@@ -1,19 +1,19 @@
+@import "/home/sharvesh/.config/matugen/generated/colors.css";
 
+@define-color base-bg @background;
+@define-color surface @surface;
+@define-color surface-alt @surface-container;
+@define-color border-col @outline;
 
-@define-color base-bg        #070B17E6; 
-@define-color surface        #0D1325F2;
-@define-color surface-alt    #121B33F2;
-@define-color border-col     #223A73;
-@define-color glow-col       #4F7DFF55;
+@define-color accent @primary;
+@define-color accent-hover @primary-container;
+@define-color accent-active @secondary;
 
-@define-color accent         #4F7DFF;
-@define-color accent-hover   #5E8CFF;
-@define-color accent-active  #709BFF;
+@define-color text-primary @on-surface;
+@define-color text-secondary @on-surface-variant;
+@define-color text-disabled @outline;
 
-@define-color text-primary   #F4F6FF;
-@define-color text-secondary #9AA9D5;
-@define-color text-disabled  #657298;
-@define-color urgent         #FF5C7A;
+@define-color urgent @error;
 
 * {
     all: unset;

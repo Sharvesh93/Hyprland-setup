@@ -1,32 +1,22 @@
-vim.pack.add({
-    {
-        src = "https://github.com/catppuccin/nvim",
-        name = "catppuccin",
-    },
-})
+vim.cmd("packadd catppuccin")
+local colors = require("generated.colors")
 
 require("catppuccin").setup({
-
     flavour = "macchiato",
-
-    transparent_background = false,
-
-    no_italic = true,
 
     color_overrides = {
         macchiato = {
-            base = "#0A1024",
-            mantle = "#060A18",
-            crust = "#02040C",
+            base = colors.background,
+            mantle = colors.surface,
+            crust = colors.surface,
 
-            surface0 = "#111A36",
-            surface1 = "#172753",
-            surface2 = "#223A68",
+            text = colors.text,
 
-            text = "#E3E9FF",
+            blue = colors.primary,
+            sapphire = colors.secondary,
+            lavender = colors.tertiary,
 
-            blue = "#7096FF",
-            lavender = "#88ABFF",
+            red = colors.error,
         },
     },
 })
