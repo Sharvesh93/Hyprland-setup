@@ -13,7 +13,7 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))                         
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))                   -- Swaync || notification center 
 hl.bind(mainMod .. " + B ", hl.dsp.exec_cmd("~/.local/bin/screenrecord.sh"))      -- Screen Recorder
 hl.bind(mainMod .. " + H ", hl.dsp.exec_cmd("bash ~/check.sh"))                   -- Screen Recorder
-
+hl.bind("SUPER + Escape", hl.dsp.exec_cmd("~/.config/rofi/scripts/powermenu.sh"))
 hl.bind(
     "XF86MonBrightnessUp",
     hl.dsp.exec_cmd("brightnessctl set 5%+"),
