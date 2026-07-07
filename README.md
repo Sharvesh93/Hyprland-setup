@@ -129,7 +129,6 @@ Before installing, make sure you have:
 
 ```bash
 # Clone the repository
-# TODO: Replace <username>/<repo> with the actual GitHub path
 git clone https://github.com/Sharvesh93/Hyprland-setup.git
 
 # Move into the project directory
