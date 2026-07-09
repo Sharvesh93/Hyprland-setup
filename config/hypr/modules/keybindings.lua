@@ -14,6 +14,9 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t"))                 
 hl.bind(mainMod .. " + B ", hl.dsp.exec_cmd("~/.local/bin/screenrecord.sh"))      -- Screen Recorder
 hl.bind(mainMod .. " + H ", hl.dsp.exec_cmd("bash ~/check.sh"))                   -- Screen Recorder
 hl.bind("SUPER + Escape", hl.dsp.exec_cmd("~/.config/rofi/scripts/powermenu.sh"))
+
+
+-- ------------------------ Brightness ---------------------------------------------------
 hl.bind(
     "XF86MonBrightnessUp",
     hl.dsp.exec_cmd("brightnessctl set 5%+"),
@@ -25,6 +28,13 @@ hl.bind(
     hl.dsp.exec_cmd("brightnessctl set 5%-"),
     { locked = true, repeating = true }
 )
+
+
+-- ----------------------------------SWAP WINDOWS ----------------------------------------------
+hl.bind("SUPER + SHIFT + Left",  hl.dsp.window.swap({ direction = "left" }))
+hl.bind("SUPER + SHIFT + Right", hl.dsp.window.swap({ direction = "right" }))
+hl.bind("SUPER + SHIFT + Up",    hl.dsp.window.swap({ direction = "up" }))
+hl.bind("SUPER + SHIFT + Down",  hl.dsp.window.swap({ direction = "down" }))
 
 -- ---------------------------------------------------------------------------------------------
 
