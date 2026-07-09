@@ -22,37 +22,13 @@ trap cleanup EXIT
 
 ping -c1 archlinux.org >/dev/null 2>&1 || error "No internet connection."
 
-sudo -v || error "Failed to obtain sudo privileges."
 
 ################################################################################
 # Package Lists
 ################################################################################
 
 PACMAN_PACKAGES=(
-    base-devel
-    git
-    neovim
-    bat
-    hyprland
-    kitty
-    rofi
-    waybar
-    swaync
-    hyprlock
-    grim
-    slurp
-    wl-clipboard
-    eza
-    pipewire
-    pipewire-pulse
 
-    fish 
-    fd
-    yazi
-    fzf
-    flatpak
-    zsh
-    firefox
 
     nautilus
     nwg-look
@@ -146,3 +122,4 @@ log "Installation complete."
 
 echo
 echo "You may want to reboot before logging into Hyprland."
+

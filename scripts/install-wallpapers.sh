@@ -11,3 +11,6 @@ mkdir -p ~/Pictures/Wallpapers
 cp -r "$SCRIPT_DIR/Wallpapers/"* ~/Pictures/Wallpapers/
 
 mv wallpapers.sh ~/.local/bin/wallpapers.sh
+
+chmod +x ~/.local/bin/wallpapers.sh
+

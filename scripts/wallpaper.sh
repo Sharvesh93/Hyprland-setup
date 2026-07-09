@@ -75,6 +75,7 @@ matugen image "$wallpaper" \
     --source-color-index 0 \
     --quiet
 
+# ---------------------------------------
 hyprctl reload
 
 pkill waybar
