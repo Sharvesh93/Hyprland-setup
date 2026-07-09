@@ -69,7 +69,6 @@ awww img \
     --transition-angle "$angle" \
     --transition-fps 60
 
-
 matugen image "$wallpaper" \
     --mode dark \
     --source-color-index 0 \

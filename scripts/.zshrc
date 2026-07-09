@@ -1,4 +1,3 @@
-fastfetch 
 autoload -Uz colors vcs_info
 colors
 

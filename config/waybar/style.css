@@ -59,7 +59,7 @@ tooltip label {
 }
 
 #workspaces button:hover {
-    background-color: @on-backgroun;
+    background-color: @on-background;
     color: @surface;
 }
 

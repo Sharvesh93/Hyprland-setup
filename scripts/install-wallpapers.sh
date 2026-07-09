@@ -10,7 +10,15 @@ mkdir -p ~/Pictures/Wallpapers
 
 cp -r "$SCRIPT_DIR/Wallpapers/"* ~/Pictures/Wallpapers/
 
-mv wallpapers.sh ~/.local/bin/wallpapers.sh
+awww img ~/Pictures/Wallpapers/the_girl.jpg
 
-chmod +x ~/.local/bin/wallpapers.sh
+matugen image  ~/Pictures/Wallpapers/the_girl.jpg\
+    --mode dark \
+    --source-color-index 0 \
+    --quiet
 
+mkdir -p ~/.local/bin
+
+mv wallpaper.sh ~/.local/bin/wallpaper.sh
+
+chmod +x ~/.local/bin/wallpaper.sh

@@ -8,7 +8,7 @@ echo "Installing configs..."
 
 mkdir -p ~/.config
 
-
 cp -r "$SCRIPT_DIR/config/"* ~/.config/
 
-ln -s .~/.config/matugen/generated/ ~/.config/hypr/themes
+
+ln -sfn ~/.config/matugen/generated ~/.config/hypr/themes/generated

@@ -49,6 +49,7 @@ PACMAN_PACKAGES=(
     fd
     yazi
     fzf
+    matugen
     flatpak
     zsh
     firefox
