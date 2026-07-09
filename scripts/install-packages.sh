@@ -28,14 +28,35 @@ ping -c1 archlinux.org >/dev/null 2>&1 || error "No internet connection."
 ################################################################################
 
 PACMAN_PACKAGES=(
+    base-devel
+    neovim
+    bat
+    hyprland
+    kitty
+    rofi
+    waybar
+    swaync
+    hyprlock
+    grim
+    slurp
+    wl-clipboard
+    eza
 
+    pipewire
+    pipewire-pulse
 
+    fish 
+    fd
+    yazi
+    fzf
+    flatpak
+    zsh
+    firefox
+    brightnessctl
     nautilus
     nwg-look
     gnome-themes-extra
-
     ttf-jetbrains-mono-nerd
-
     tlp
     # waypaper
     # mpvpaper
