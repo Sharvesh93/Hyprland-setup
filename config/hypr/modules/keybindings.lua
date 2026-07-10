@@ -48,7 +48,7 @@ hl.bind(mainMod .." + Tab",hl.dsp.exec_cmd("~/.local/bin/wallpaper.sh random"))
 
 -- Flatpak items
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flatpak run com.brave.Browser"))      -- brave 
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("flatpak run com.visualstudio.code"))  -- VS Code
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("code"))                               -- VS Code
 -- ---------------------------------------------------------------------------------------------
 
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())         -- Close

@@ -3,12 +3,39 @@
 set -e
 
 BACKUP_DIR="$HOME/.config-backup/$(date +%Y-%m-%d_%H-%M-%S)"
+BACKUP_DONE=false
 
-mkdir -p "$BACKUP_DIR"
+backup() {
+    local dir="$1"
 
-for dir in hypr waybar rofi kitty fish nvim swaync; do
-    if [ -d "$HOME/.config/$dir" ]; then
+    if [[ -d "$HOME/.config/$dir" ]]; then
+        if [[ "$BACKUP_DONE" == false ]]; then
+            mkdir -p "$BACKUP_DIR"
+            BACKUP_DONE=true
+        fi
+
+        echo "Backing up $dir..."
         cp -r "$HOME/.config/$dir" "$BACKUP_DIR/"
-        echo "Backed up $dir"
+    else
+        echo "Skipping $dir (not installed)"
     fi
-done
+}
+
+# Hyprland rice components
+backup hypr
+backup waybar
+backup rofi
+backup kitty
+backup fish
+backup nvim
+backup swaync
+
+# Optional files
+[[ -f "$HOME/.zshrc" ]] && cp "$HOME/.zshrc" "$BACKUP_DIR/" || true
+[[ -f "$HOME/.gtkrc-2.0" ]] && cp "$HOME/.gtkrc-2.0" "$BACKUP_DIR/" || true
+
+if [[ "$BACKUP_DONE" == false ]]; then
+    echo "No existing Hyprland configuration found. Skipping backup."
+else
+    echo "Backup completed successfully."
+fi
