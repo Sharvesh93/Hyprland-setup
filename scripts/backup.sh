@@ -1,41 +1,117 @@
 #!/usr/bin/env bash
 
-set -e
+set -Eeuo pipefail
 
-BACKUP_DIR="$HOME/.config-backup/$(date +%Y-%m-%d_%H-%M-%S)"
-BACKUP_DONE=false
+################################################################################
+# Logging
+################################################################################
 
-backup() {
+log() {
+    printf "\n\033[1;34m==>\033[0m %s\n" "$1"
+}
+
+success() {
+    printf "\033[1;32m✓\033[0m %s\n" "$1"
+}
+
+warn() {
+    printf "\033[1;33mWarning:\033[0m %s\n" "$1"
+}
+
+################################################################################
+# Configuration
+################################################################################
+
+BACKUP_ROOT="$HOME/.config-backup"
+BACKUP_DIR="$BACKUP_ROOT/$(date +%Y-%m-%d_%H-%M-%S)"
+
+CONFIGS=(
+    hypr
+    waybar
+    rofi
+    kitty
+    fish
+    nvim
+    swaync
+)
+
+FILES=(
+    .zshrc
+    .gtkrc-2.0
+)
+
+################################################################################
+# Backup
+################################################################################
+
+FOUND=false
+
+backup_config() {
+
     local dir="$1"
 
     if [[ -d "$HOME/.config/$dir" ]]; then
-        if [[ "$BACKUP_DONE" == false ]]; then
-            mkdir -p "$BACKUP_DIR"
-            BACKUP_DONE=true
-        fi
 
-        echo "Backing up $dir..."
-        cp -r "$HOME/.config/$dir" "$BACKUP_DIR/"
+        [[ "$FOUND" == false ]] && mkdir -p "$BACKUP_DIR"
+
+        cp -a "$HOME/.config/$dir" "$BACKUP_DIR/"
+
+        success "Backed up $dir"
+
+        FOUND=true
+
     else
-        echo "Skipping $dir (not installed)"
+
+        warn "$dir not found. Skipping."
+
     fi
 }
 
-# Hyprland rice components
-backup hypr
-backup waybar
-backup rofi
-backup kitty
-backup fish
-backup nvim
-backup swaync
+backup_file() {
 
-# Optional files
-[[ -f "$HOME/.zshrc" ]] && cp "$HOME/.zshrc" "$BACKUP_DIR/" || true
-[[ -f "$HOME/.gtkrc-2.0" ]] && cp "$HOME/.gtkrc-2.0" "$BACKUP_DIR/" || true
+    local file="$1"
 
-if [[ "$BACKUP_DONE" == false ]]; then
-    echo "No existing Hyprland configuration found. Skipping backup."
+    if [[ -f "$HOME/$file" ]]; then
+
+        [[ "$FOUND" == false ]] && mkdir -p "$BACKUP_DIR"
+
+        cp -a "$HOME/$file" "$BACKUP_DIR/"
+
+        success "Backed up $file"
+
+        FOUND=true
+
+    fi
+}
+
+################################################################################
+# Run
+################################################################################
+
+log "Checking existing configuration..."
+
+for dir in "${CONFIGS[@]}"; do
+    backup_config "$dir"
+done
+
+for file in "${FILES[@]}"; do
+    backup_file "$file"
+done
+
+################################################################################
+# Result
+################################################################################
+
+echo
+
+if [[ "$FOUND" == true ]]; then
+
+    success "Backup saved to:"
+    echo "$BACKUP_DIR"
+
 else
-    echo "Backup completed successfully."
+
+    echo "No existing Hyprland configuration found."
+    echo "Skipping backup."
+
 fi

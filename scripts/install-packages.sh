@@ -3,68 +3,85 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
+################################################################################
+# Logging
+################################################################################
+
 log() {
     printf "\n\033[1;34m==>\033[0m %s\n" "$1"
 }
 
+success() {
+    printf "\033[1;32m✓\033[0m %s\n" "$1"
+}
+
 warn() {
-    printf "\n\033[1;33mWarning:\033[0m %s\n" "$1"
+    printf "\033[1;33mWarning:\033[0m %s\n" "$1"
 }
 
 error() {
-    printf "\n\033[1;31mError:\033[0m %s\n" "$1"
+    printf "\033[1;31mError:\033[0m %s\n" "$1"
     exit 1
 }
 
+################################################################################
+# Cleanup
+################################################################################
+
+TMPDIR=""
+
 cleanup() {
-    [[ -n "${TMPDIR:-}" && -d "$TMPDIR" ]] && rm -rf "$TMPDIR"
+    [[ -n "$TMPDIR" && -d "$TMPDIR" ]] && rm -rf "$TMPDIR"
 }
 
 trap cleanup EXIT
 
-[[ -f /etc/arch-release ]] || error "This script is intended for Arch Linux."
+################################################################################
+# Checks
+################################################################################
+
+[[ -f /etc/arch-release ]] || error "This installer supports Arch Linux only."
+
+command -v sudo >/dev/null || error "sudo is required."
+command -v git >/dev/null || error "git is required."
 
 ################################################################################
-# Connectivity check
+# Internet
 ################################################################################
-# ICMP (ping) is blocked on plenty of networks (corporate VPNs, some cloud
-# hosts, some routers) even when the connection itself is fine, which made
-# this check fail intermittently and abort the whole install. Try a couple of
-# different methods before giving up.
+
 log "Checking internet connection..."
 
 check_connection() {
-    if command -v curl &>/dev/null; then
-        curl -fsSL --max-time 5 -o /dev/null https://archlinux.org && return 0
+
+    if command -v curl >/dev/null; then
+        curl -fsSL --max-time 5 https://archlinux.org >/dev/null && return 0
     fi
-    if command -v ping &>/dev/null; then
-        ping -c1 -W3 archlinux.org &>/dev/null && return 0
+
+    if command -v ping >/dev/null; then
+        ping -c1 archlinux.org >/dev/null 2>&1 && return 0
     fi
-    getent hosts archlinux.org &>/dev/null && return 0
-    return 1
+
+    getent hosts archlinux.org >/dev/null 2>&1
 }
 
-check_connection || error "No internet connection detected. Connect to the internet and try again."
+check_connection || error "No internet connection."
 
 ################################################################################
-# Package Lists
+# Packages
 ################################################################################
 
-# Core Hyprland ecosystem and session essentials. Without these, the configs
-# in this repo (hyprland.lua, hyprlock.conf, waybar, etc.) have nothing to
-# run against, which is the main reason a fresh install could fail depending
-# on what happened to already be on the machine.
 PACMAN_PACKAGES=(
-    # Hyprland core + companions
+
     hyprland
     hyprlock
     hypridle
     hyprpolkitagent
+
     xdg-desktop-portal-hyprland
+
     qt5-wayland
     qt6-wayland
 
-    # Desktop pieces used by this config
     waybar
     rofi
     kitty
@@ -72,77 +89,88 @@ PACMAN_PACKAGES=(
     zsh
     neovim
     swaync
+
     awww
 
-    # File manager / theming
     nautilus
     nwg-look
     gnome-themes-extra
 
-    # Fonts
     ttf-jetbrains-mono-nerd
 
-    # CLI tools referenced by keybindings, scripts, and shell configs
     grim
     slurp
     wl-clipboard
     brightnessctl
     playerctl
+
     jq
     fastfetch
     fzf
     fd
     zoxide
 
-    # Audio / network / bluetooth
     pipewire
     pipewire-pulse
     pipewire-alsa
     wireplumber
+
     networkmanager
+
     bluez
     bluez-utils
 
-    # Power management
     tlp
 
-    # Build tooling needed for yay / AUR packages below
     git
     base-devel
 
-    # Misc
     flatpak
+
     libnotify
 )
 
 AUR_PACKAGES=(
+
     ttf-iosevka-nerd
+
     matugen-bin
+
     visual-studio-code-bin
+
     bibata-cursor-theme-bin
+
     cliphist
+
 )
 
 FLATPAK_PACKAGES=(
+
     com.brave.Browser
+
 )
 
 ################################################################################
-# Pacman packages
+# Pacman
 ################################################################################
 
-log "Updating system and installing pacman packages..."
+log "Updating system..."
 
-sudo pacman -Syu \
+sudo pacman -Syu --noconfirm
+
+log "Installing pacman packages..."
+
+sudo pacman -S \
     --needed \
     --noconfirm \
     "${PACMAN_PACKAGES[@]}"
 
 ################################################################################
-# yay (AUR helper)
+# yay
 ################################################################################
 
-if ! command -v yay &>/dev/null; then
+if ! command -v yay >/dev/null; then
+
     log "Installing yay..."
 
     TMPDIR="$(mktemp -d)"
@@ -150,14 +178,19 @@ if ! command -v yay &>/dev/null; then
     git clone https://aur.archlinux.org/yay.git "$TMPDIR"
 
     pushd "$TMPDIR" >/dev/null
+
     makepkg -si --noconfirm
+
     popd >/dev/null
+
 else
-    log "yay already installed."
+
+    success "yay already installed."
+
 fi
 
 ################################################################################
-# AUR Packages
+# AUR
 ################################################################################
 
 log "Installing AUR packages..."
@@ -173,35 +206,66 @@ yay -S \
 # Flatpak
 ################################################################################
 
-if ! flatpak remote-list | grep -q flathub; then
-    log "Adding Flathub..."
+if command -v flatpak >/dev/null; then
 
-    flatpak remote-add \
-        --if-not-exists \
+    if ! flatpak remote-list | grep -q flathub; then
+
+        log "Adding Flathub..."
+
+        flatpak remote-add \
+            --if-not-exists \
+            flathub \
+            https://flathub.org/repo/flathub.flatpakrepo
+
+    fi
+
+    log "Installing Flatpak packages..."
+
+    flatpak install \
+        -y \
         flathub \
-        https://flathub.org/repo/flathub.flatpakrepo
+        "${FLATPAK_PACKAGES[@]}"
+
+else
+
+    warn "Flatpak not installed."
+
 fi
 
-log "Installing Flatpak packages..."
-
-flatpak install \
-    -y \
-    flathub \
-    "${FLATPAK_PACKAGES[@]}"
-
 ################################################################################
-# Enable Services
+# Services
 ################################################################################
 
-log "Enabling TLP..."
+enable_service() {
 
-sudo systemctl enable --now tlp.service
+    local service="$1"
+
+    if systemctl list-unit-files | grep -q "^${service}"; then
+
+        sudo systemctl enable --now "$service"
+
+        success "$service enabled."
+
+    else
+
+        warn "$service not found."
+
+    fi
+
+}
+
+log "Enabling services..."
+
+enable_service "tlp.service"
+enable_service "NetworkManager.service"
+enable_service "bluetooth.service"
 
 ################################################################################
-# Done
+# Finished
 ################################################################################
-
-log "Installation complete."
 
 echo
-echo "You may want to reboot before logging into Hyprland."
+success "All packages installed successfully."
+
+echo
+echo "You can now continue with the configuration installation."

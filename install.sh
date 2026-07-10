@@ -1,85 +1,108 @@
 #!/usr/bin/env bash
 
-set -e
+set -Eeuo pipefail
 
-# Make all scripts executable
-chmod +x ./scripts/*.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Prevent running as root
-if [[ "$EUID" -eq 0 ]]; then
-    echo "❌ Do not run this installer with sudo."
-    exit 1
-fi
-
-# Function to run a step safely
-run_step() {
-    local message="$1"
-    shift
-
-    echo
-    echo "==> $message"
-
-    if "$@"; then
-        echo "✅ Success"
-    else
-        echo "⚠️ Failed: $message"
-    fi
+log() {
+    printf "\n\033[1;34m==>\033[0m %s\n" "$1"
 }
 
-# Install packages
-run_step "Installing packages..." ./scripts/install-packages.sh
+success() {
+    printf "\033[1;32m✓\033[0m %s\n" "$1"
+}
 
-# Backup existing configs
-if [[ -d "~/.config" ]]; then
-    run_step "Backing up existing configs..." ./scripts/backup.sh
+warn() {
+    printf "\033[1;33mWarning:\033[0m %s\n" "$1"
+}
+
+error() {
+    printf "\033[1;31mError:\033[0m %s\n" "$1"
+    exit 1
+}
+
+# ---------------------------------------------------------------------
+# Checks
+# ---------------------------------------------------------------------
+
+[[ "$EUID" -ne 0 ]] || error "Do not run this installer as root."
+
+cd "$SCRIPT_DIR"
+
+chmod +x scripts/*.sh
+
+# Verify required scripts exist
+required_scripts=(
+    install-packages.sh
+    backup.sh
+    install-configs.sh
+    install-wallpapers.sh
+)
+
+for script in "${required_scripts[@]}"; do
+    [[ -f "scripts/$script" ]] || error "Missing scripts/$script"
+done
+
+# ---------------------------------------------------------------------
+# Installation
+# ---------------------------------------------------------------------
+
+log "Installing required packages..."
+./scripts/install-packages.sh
+success "Package installation completed."
+
+log "Backing up existing configuration..."
+./scripts/backup.sh
+success "Backup completed."
+
+log "Installing configuration files..."
+./scripts/install-configs.sh
+success "Configuration installed."
+
+log "Installing wallpapers..."
+./scripts/install-wallpapers.sh
+success "Wallpapers installed."
+
+# ---------------------------------------------------------------------
+# Shell configuration
+# ---------------------------------------------------------------------
+
+if [[ -f scripts/.zshrc ]]; then
+    cp scripts/.zshrc "$HOME/.zshrc"
+    success ".zshrc installed."
 else
-    echo "⚠️ backup.sh not found. Skipping."
+    warn ".zshrc not found. Skipping."
 fi
 
-# Install configs
-if [[ -f "./scripts/install-configs.sh" ]]; then
-    run_step "Installing configs..." ./scripts/install-configs.sh
-else
-    echo "⚠️ install-configs.sh not found. Skipping."
+# ---------------------------------------------------------------------
+# Permissions
+# ---------------------------------------------------------------------
+
+if [[ -d "$HOME/.config/rofi" ]]; then
+    chmod +x "$HOME/.config/rofi/"* 2>/dev/null || true
 fi
 
-# Install wallpapers
-if [[ -f "./scripts/install-wallpapers.sh" ]]; then
-    run_step "Installing wallpapers..." ./scripts/install-wallpapers.sh
-else
-    echo "⚠️ install-wallpapers.sh not found. Skipping."
+if [[ -d "$HOME/.config/waybar" ]]; then
+    chmod +x "$HOME/.config/waybar/"* 2>/dev/null || true
 fi
 
-# Install ZSH configuration
-if [[ -f "./scripts/.zshrc" ]]; then
-    cp ./scripts/.zshrc ~/.zshrc
-    echo "✅ Installed .zshrc"
-else
-    echo "⚠️ .zshrc not found. Skipping."
-fi
-
-# Make Rofi scripts executable
-if [[ -d ~/.config/rofi ]]; then
-    chmod +x ~/.config/rofi/* 2>/dev/null || true
-else
-    echo "⚠️ ~/.config/rofi not found. Skipping."
-fi
-
-# Make Waybar scripts executable
-if [[ -d ~/.config/waybar ]]; then
-    chmod +x ~/.config/waybar/* 2>/dev/null || true
-else
-    echo "⚠️ ~/.config/waybar not found. Skipping."
-fi
+# ---------------------------------------------------------------------
+# Finish
+# ---------------------------------------------------------------------
 
 echo
-echo "🎉 Setup complete."
-echo "A reboot is recommended."
+success "Installation completed successfully."
 
-read -rp "Reboot now? [Y/n] " confirm
+echo
+echo "A reboot is recommended before logging into Hyprland."
 
-if [[ "$confirm" =~ ^[Nn]$ ]]; then
-    echo "Skipping reboot."
-else
-    reboot
-fi
+read -rp "Reboot now? [Y/n]: " answer
+
+case "${answer,,}" in
+    n|no)
+        echo "Reboot skipped."
+        ;;
+    *)
+        reboot
+        ;;
+esac

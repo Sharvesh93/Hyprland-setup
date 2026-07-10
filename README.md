@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🖥️ Hyprland Setup
-<h1> Still in progress </h1>
+
 A clean, modern, and modular **Hyprland** dotfiles configuration for **Arch Linux**.
 
 Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
