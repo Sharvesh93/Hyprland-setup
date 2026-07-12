@@ -117,7 +117,8 @@ PACMAN_PACKAGES=(
     wireplumber
 
     networkmanager
-
+     
+    blueman 
     bluez
     bluez-utils
 
