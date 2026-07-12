@@ -117,14 +117,14 @@ PACMAN_PACKAGES=(
     wireplumber
 
     networkmanager
+    nm-connection-editor
      
     blueman 
     bluez
     bluez-utils
 
     tlp
-
-    git
+    
     base-devel
 
     flatpak
