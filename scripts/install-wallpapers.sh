@@ -33,7 +33,7 @@ SOURCE_WALLPAPERS="$SCRIPT_DIR/Wallpapers"
 TARGET_WALLPAPERS="$HOME/Pictures/Wallpapers"
 
 SOURCE_SCRIPT="$SCRIPT_DIR/scripts/wallpaper.sh"
-TARGET_SCRIPT="$HOME/.local/bin/wallpaper"
+TARGET_SCRIPT="$HOME/.local/bin/wallpaper.sh"
 
 DEFAULT_WALLPAPER="$TARGET_WALLPAPERS/the_girl.jpg"
 

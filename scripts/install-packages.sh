@@ -78,7 +78,8 @@ PACMAN_PACKAGES=(
     hyprpolkitagent
 
     xdg-desktop-portal-hyprland
-
+    
+    eza
     qt5-wayland
     qt6-wayland
 
