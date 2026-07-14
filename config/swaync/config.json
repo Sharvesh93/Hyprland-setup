@@ -2,7 +2,7 @@
     "$schema": "/etc/xdg/swaync/configSchema.json",
 
     "positionX": "right",
-    "positionY": "bottom",
+    "positionY": "top",
     "layer": "overlay",
     "control-center-layer": "overlay",
     "layer-shell": true,
@@ -16,7 +16,7 @@
     "control-center-margin-left": 0,
     "notification-window-width": 380,
     "control-center-width": 340,
-    "control-center-height": 420,
+    "control-center-height": 300,
 
     "timeout": 6,
     "timeout-low": 4,
