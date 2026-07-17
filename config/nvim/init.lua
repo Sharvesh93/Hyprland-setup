@@ -1,7 +1,2 @@
--- Leader key (must be set before plugins/keymaps)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-
--- Plugins
-require("plugins.catppuccin")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
