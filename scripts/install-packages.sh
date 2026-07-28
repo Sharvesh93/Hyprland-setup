@@ -137,6 +137,8 @@ AUR_PACKAGES=(
     ttf-iosevka-nerd
 
     matugen-bin
+    
+    zen
 
     visual-studio-code-bin
 
