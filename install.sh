@@ -69,6 +69,7 @@ success "Wallpapers installed."
 
 if [[ -f scripts/.zshrc ]]; then
     cp scripts/.zshrc "$HOME/.zshrc"
+
     success ".zshrc installed."
 else
     warn ".zshrc not found. Skipping."
