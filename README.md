@@ -20,8 +20,6 @@ Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **
 
 ## 📸 Preview
 
-<!-- TODO: Replace these placeholders with your own screenshots once available -->
-
 <details>
 <summary><strong>Desktop</strong></summary>
 
@@ -50,9 +48,7 @@ Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **
 
 </details>
 
-> ⚠️ **Note:** A dedicated lock screen screenshot is not yet included. Add one at `screenshots/lockscreen.png` and reference it here once captured.
 
----
 
 ## ✨ Features
 
@@ -140,15 +136,6 @@ chmod +x install.sh
 # Run the installer
 ./install.sh
 ```
-
-What each step does:
-
-1. **`git clone ...`** — downloads the repository to your machine.
-2. **`cd Hyprland-setup`** — enters the project directory.
-3. **`chmod +x install.sh`** — grants execute permission to the installer.
-4. **`./install.sh`** — runs the full setup: installs packages, backs up existing configs, copies new configs into `~/.config`, installs wallpapers, and optionally reboots at the end.
-
----
 
 ## 📥 Packages Installed
 
