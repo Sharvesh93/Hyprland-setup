@@ -94,10 +94,14 @@ fi
 echo
 success "Installation completed successfully."
 
-echo
+
+printf "----------------------------------------------------------"
+echo "---------------- COMPLETED INSTILATION ---------------------"
+echo  "----------------------------------------------------------"
 echo "A reboot is recommended before logging into Hyprland."
 
 read -rp "Reboot now? [Y/n]: " answer
+
 
 case "${answer,,}" in
     n|no)
