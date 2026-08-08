@@ -138,6 +138,8 @@ AUR_PACKAGES=(
 
     matugen-bin
     
+    macOS
+
     zen
 
     visual-studio-code-bin
