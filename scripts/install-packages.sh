@@ -130,6 +130,10 @@ PACMAN_PACKAGES=(
     flatpak
 
     libnotify
+
+    # DaVinci Resolve 21 runtime dependencies
+    glu
+    libxcrypt-compat
 )
 
 AUR_PACKAGES=(
@@ -275,3 +279,5 @@ success "All packages installed successfully."
 
 echo
 echo "You can now continue with the configuration installation."
+echo "Note: DaVinci Resolve itself must still be installed using the Blackmagic Design installer."
+
