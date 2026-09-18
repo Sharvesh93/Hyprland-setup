@@ -3,28 +3,27 @@ hl.config({
     general = {
         gaps_in  = 5,
         gaps_out = 7,
-        border_size = 1,
+        border_size = 0,
         col = {
             active_border   = colors.primary,
             inactive_border = colors.outline    
         },
-        resize_on_border =false,
+        resize_on_border = false,
         allow_tearing = false,
         layout = "dwindle",
     },
 
     decoration = {
-        rounding       = 6,
-        rounding_power = 1,
-        active_opacity   = 0.95,
-
-        inactive_opacity = 0.8,
+        rounding       = 16, 
+        rounding_power = 2,
+        active_opacity   = 0.98, 
+        inactive_opacity = 0.94,
 
         shadow = {
             enabled      = true,
-            range        = 8,
+            range        = 20, 
             render_power = 3,
-            color        = 0xee1a1a1a,
+            color        = 0x66000000, 
         },
 
         blur = {
@@ -37,5 +36,10 @@ hl.config({
 
     animations = {
         enabled = true,
+    },
+
+    -- Add this block for Kitty-specific opacity (Active and Inactive)
+    windowrulev2 = {
+        "opacity 1.0 0.95, class:^(kitty)$"
     },
 })
