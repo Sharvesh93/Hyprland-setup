@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+
+# Decorate this script with the following to make it more robust:
+
+
 set -Eeuo pipefail
 IFS=$'\n\t'
 
@@ -76,7 +80,8 @@ PACMAN_PACKAGES=(
     hyprlock
     hypridle
     hyprpolkitagent
-
+    noctalia
+    quickshell
     xdg-desktop-portal-hyprland
     
     eza
@@ -131,7 +136,6 @@ PACMAN_PACKAGES=(
 
     libnotify
 
-    # DaVinci Resolve 21 runtime dependencies
     glu
     libxcrypt-compat
 )
@@ -199,6 +203,25 @@ else
 
 fi
 
+if ! command -v paru >/dev/null; then
+
+    log "Installing paru..."
+
+    TMPDIR="$(mktemp -d)"
+
+    git clone https://aur.archlinux.org/paru.git "$TMPDIR"
+
+    pushd "$TMPDIR" >/dev/null
+
+    makepkg -si --noconfirm
+
+    popd >/dev/null
+
+else
+
+    success "paru already installed."
+
+fi
 ################################################################################
 # AUR
 ################################################################################
@@ -276,8 +299,3 @@ enable_service "bluetooth.service"
 
 echo
 success "All packages installed successfully."
-
-echo
-echo "You can now continue with the configuration installation."
-echo "Note: DaVinci Resolve itself must still be installed using the Blackmagic Design installer."
-
