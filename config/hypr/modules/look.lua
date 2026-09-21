@@ -1,45 +1,25 @@
-local colors = require("themes.palette")
 hl.config({
-    general = {
-        gaps_in  = 5,
-        gaps_out = 7,
-        border_size = 0,
-        col = {
-            active_border   = colors.primary,
-            inactive_border = colors.outline    
-        },
-        resize_on_border = false,
-        allow_tearing = false,
-        layout = "dwindle",
-    },
+	general = {
+		gaps_in = 5,
+		gaps_out = 10,
+		border_size = 0,
+	},
 
-    decoration = {
-        rounding       = 16, 
-        rounding_power = 2,
-        active_opacity   = 0.98, 
-        inactive_opacity = 0.94,
+	decoration = {
+		rounding = 8,
+		rounding_power = 10,
 
-        shadow = {
-            enabled      = true,
-            range        = 20, 
-            render_power = 3,
-            color        = 0x66000000, 
-        },
+		shadow = {
+			enabled = true,
+			range = 4,
+			render_power = 3,
+		},
 
-        blur = {
-            enabled   = true,
-            size      = 8,
-            passes    = 3,
-            vibrancy  = 0.1696,
-        },
-    },
-
-    animations = {
-        enabled = true,
-    },
-
-    -- Add this block for Kitty-specific opacity (Active and Inactive)
-    windowrulev2 = {
-        "opacity 1.0 0.95, class:^(kitty)$"
-    },
+		blur = {
+			enabled = true,
+			size = 3,
+			passes = 4,
+			vibrancy = 0.1696,
+		},
+	},
 })
