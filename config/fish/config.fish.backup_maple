@@ -7,12 +7,11 @@ if test -f ~/.config/matugen/generated/colors.fish
 end
 
 # Aliases
-alias ls="eza --icons --color=always"
+alias ls="eza -la --icons --color=always"
 alias ll="ls -lh"
 alias la="ls -A"
 alias gs="git status"
-alias y="yazi"
-alias cd="z" 
+#alias ls="eza -la --icons --color=always"
 # History settings
 set -g fish_history_max_items 50000
 

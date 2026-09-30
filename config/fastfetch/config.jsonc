@@ -1,0 +1,10 @@
+{
+  "logo": {
+    "type": "kitty",
+    "source": "~/.config/fastfetch/fastfetch.png",
+    "width": 30,
+    "height": 14
+  },
+  "modules": []
+}
+
