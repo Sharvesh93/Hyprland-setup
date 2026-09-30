@@ -299,3 +299,11 @@ enable_service "bluetooth.service"
 
 echo
 success "All packages installed successfully."
+
+sleep 5
+
+printf "============================== \n"
+
+printf "\n Everything is downlaoded \n"
+
+printf "============================== \n"
