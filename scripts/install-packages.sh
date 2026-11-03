@@ -92,7 +92,14 @@ PACMAN_PACKAGES=(
     rofi
     kitty
     fish
-    zsh
+    
+    node
+    npm 
+    docker 
+    docker-compose
+    cron
+    
+
     neovim
     swaync
 
@@ -121,7 +128,6 @@ PACMAN_PACKAGES=(
     pipewire-alsa
     wireplumber
 
-    networkmanager
     nm-connection-editor
      
     blueman 
@@ -148,21 +154,12 @@ AUR_PACKAGES=(
     
     macOS
 
-    zen
-
-    visual-studio-code-bin
-
     bibata-cursor-theme-bin
 
     cliphist
 
 )
 
-FLATPAK_PACKAGES=(
-
-    com.brave.Browser
-
-)
 
 ################################################################################
 # Pacman
@@ -235,35 +232,6 @@ yay -S \
     --answeredit=None \
     "${AUR_PACKAGES[@]}"
 
-################################################################################
-# Flatpak
-################################################################################
-
-if command -v flatpak >/dev/null; then
-
-    if ! flatpak remote-list | grep -q flathub; then
-
-        log "Adding Flathub..."
-
-        flatpak remote-add \
-            --if-not-exists \
-            flathub \
-            https://flathub.org/repo/flathub.flatpakrepo
-
-    fi
-
-    log "Installing Flatpak packages..."
-
-    flatpak install \
-        -y \
-        flathub \
-        "${FLATPAK_PACKAGES[@]}"
-
-else
-
-    warn "Flatpak not installed."
-
-fi
 
 ################################################################################
 # Services
@@ -290,7 +258,6 @@ enable_service() {
 log "Enabling services..."
 
 enable_service "tlp.service"
-enable_service "NetworkManager.service"
 enable_service "bluetooth.service"
 
 ################################################################################
