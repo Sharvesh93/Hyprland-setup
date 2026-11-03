@@ -1,0 +1,72 @@
+background {
+    monitor =
+    # REPLACE THIS WITH THE ACTUAL PATH TO YOUR WALLPAPER
+    path = ~/Pictures/Wallpapers/SpiderMan.jpg
+    color = rgba(25, 20, 20, 1.0)
+    
+    # Optional: Adds a slight blur to the background to make the text pop
+    blur_passes = 2
+    blur_size = 5
+}
+
+# TIME TYPOGRAPHY
+label {
+    monitor =
+    text = $TIME
+    color = rgb(255, 255, 255)
+    font_size = 130
+    font_family = Bangers
+    position = 0, 180
+    halign = center
+    valign = center
+    shadow_passes = 2
+    shadow_size = 4
+    shadow_color = rgb(226, 54, 54) # Red shadow for comic book effect
+}
+
+# "SPIDER-MAN" TYPOGRAPHY
+label {
+    monitor =
+    text = SPIDER-MAN
+    color = rgb(226, 54, 54) # Spider-Man Red
+    font_size = 85
+    font_family = Bangers
+    position = 0, 30
+    halign = center
+    valign = center
+    shadow_passes = 3
+    shadow_size = 6
+    shadow_color = rgb(15, 20, 45) # Dark blue web-shadow
+}
+
+# USERNAME TYPOGRAPHY
+label {
+    monitor =
+    text = Welcome to the Multiverse, $USER
+    color = rgb(255, 255, 255)
+    font_size = 30
+    font_family = Bangers
+    position = 0, -50
+    halign = center
+    valign = center
+}
+
+# PASSWORD INPUT FIELD
+input-field {
+    monitor =
+    size = 280, 65
+    outline_thickness = 4
+    dots_size = 0.25
+    dots_spacing = 0.2
+    dots_center = true
+    outer_color = rgb(226, 54, 54) # Spider-Man Red border
+    inner_color = rgba(15, 20, 45, 0.8) # Translucent dark blue inside
+    font_color = rgb(255, 255, 255)
+    fade_on_empty = false
+    font_family = Bangers
+    placeholder_text = <i>Web-Shooter Locked...</i>
+    hide_input = false
+    position = 0, -150
+    halign = center
+    valign = center
+}

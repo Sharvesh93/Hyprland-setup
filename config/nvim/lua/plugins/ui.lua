@@ -34,42 +34,50 @@ return {
         },
     },
 
-    -- Statusline
+    -- Minimal Transparent Statusline matching Wallpaper palette
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = function()
+            local ok, mc = pcall(require, "generated.colors")
+            local primary = (ok and mc.primary) or "#f2be6e"
+            local tertiary = (ok and mc.tertiary) or "#b7cea2"
+            local secondary = (ok and mc.secondary) or "#dcc3a1"
+            local error_col = (ok and mc.error) or "#ffb4ab"
+            local text_col = (ok and mc.text) or "#ede1d4"
+            local on_primary = (ok and mc.on_primary) or "#18130b"
+
             local transparent_theme = {
                 normal = {
-                    a = { fg = "#16161e", bg = "#7aa2f7", gui = "bold" },
-                    b = { fg = "#7aa2f7", bg = "none" },
-                    c = { fg = "#c0caf5", bg = "none" },
+                    a = { fg = on_primary, bg = primary, gui = "bold" },
+                    b = { fg = primary, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
                 insert = {
-                    a = { fg = "#16161e", bg = "#9ece6a", gui = "bold" },
-                    b = { fg = "#9ece6a", bg = "none" },
-                    c = { fg = "#c0caf5", bg = "none" },
+                    a = { fg = on_primary, bg = tertiary, gui = "bold" },
+                    b = { fg = tertiary, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
                 visual = {
-                    a = { fg = "#16161e", bg = "#bb9af7", gui = "bold" },
-                    b = { fg = "#bb9af7", bg = "none" },
-                    c = { fg = "#c0caf5", bg = "none" },
+                    a = { fg = on_primary, bg = secondary, gui = "bold" },
+                    b = { fg = secondary, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
                 replace = {
-                    a = { fg = "#16161e", bg = "#f7768e", gui = "bold" },
-                    b = { fg = "#f7768e", bg = "none" },
-                    c = { fg = "#c0caf5", bg = "none" },
+                    a = { fg = on_primary, bg = error_col, gui = "bold" },
+                    b = { fg = error_col, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
                 command = {
-                    a = { fg = "#16161e", bg = "#e0af68", gui = "bold" },
-                    b = { fg = "#e0af68", bg = "none" },
-                    c = { fg = "#c0caf5", bg = "none" },
+                    a = { fg = on_primary, bg = primary, gui = "bold" },
+                    b = { fg = primary, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
                 inactive = {
-                    a = { fg = "#565f89", bg = "none", gui = "bold" },
-                    b = { fg = "#565f89", bg = "none" },
-                    c = { fg = "#565f89", bg = "none" },
+                    a = { fg = text_col, bg = "none", gui = "bold" },
+                    b = { fg = text_col, bg = "none" },
+                    c = { fg = text_col, bg = "none" },
                 },
             }
 
@@ -102,7 +110,7 @@ return {
         end,
     },
 
-    -- Bufferline / Tabs
+    -- Minimal Transparent Bufferline / Tabs
     {
         "akinsho/bufferline.nvim",
         event = "VeryLazy",
@@ -114,45 +122,51 @@ return {
             { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
             { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
         },
-        opts = {
-            options = {
-                mode = "buffers",
-                separator_style = "thin",
-                always_show_bufferline = false,
-                diagnostics = "nvim_lsp",
-                diagnostics_indicator = function(count, level)
-                    local icon = level:match("error") and "󰅚 " or "󰀪 "
-                    return " " .. icon .. count
-                end,
-                offsets = {
-                    {
-                        filetype = "neo-tree",
-                        text = "File Explorer",
-                        highlight = "Directory",
-                        text_align = "left",
+        opts = function()
+            local ok, mc = pcall(require, "generated.colors")
+            local primary = (ok and mc.primary) or "#f2be6e"
+            local outline = (ok and mc.outline_variant) or "#383e5a"
+
+            return {
+                options = {
+                    mode = "buffers",
+                    separator_style = "thin",
+                    always_show_bufferline = false,
+                    diagnostics = "nvim_lsp",
+                    diagnostics_indicator = function(count, level)
+                        local icon = level:match("error") and "󰅚 " or "󰀪 "
+                        return " " .. icon .. count
+                    end,
+                    offsets = {
+                        {
+                            filetype = "neo-tree",
+                            text = "File Explorer",
+                            highlight = "Directory",
+                            text_align = "left",
+                        },
                     },
                 },
-            },
-            highlights = {
-                fill = { bg = "none" },
-                background = { bg = "none" },
-                buffer_selected = { bg = "none", bold = true, italic = false },
-                buffer_visible = { bg = "none" },
-                separator = { fg = "#383e5a", bg = "none" },
-                separator_selected = { fg = "#383e5a", bg = "none" },
-                separator_visible = { fg = "#383e5a", bg = "none" },
-                tab = { bg = "none" },
-                tab_selected = { bg = "none" },
-                tab_close = { bg = "none" },
-                close_button = { bg = "none" },
-                close_button_visible = { bg = "none" },
-                close_button_selected = { bg = "none" },
-                modified = { bg = "none" },
-                modified_visible = { bg = "none" },
-                modified_selected = { bg = "none" },
-                indicator_selected = { fg = "#7aa2f7", bg = "none" },
-            },
-        },
+                highlights = {
+                    fill = { bg = "none" },
+                    background = { bg = "none" },
+                    buffer_selected = { fg = primary, bg = "none", bold = true, italic = false },
+                    buffer_visible = { bg = "none" },
+                    separator = { fg = outline, bg = "none" },
+                    separator_selected = { fg = outline, bg = "none" },
+                    separator_visible = { fg = outline, bg = "none" },
+                    tab = { bg = "none" },
+                    tab_selected = { bg = "none" },
+                    tab_close = { bg = "none" },
+                    close_button = { bg = "none" },
+                    close_button_visible = { bg = "none" },
+                    close_button_selected = { bg = "none" },
+                    modified = { bg = "none" },
+                    modified_visible = { bg = "none" },
+                    modified_selected = { bg = "none" },
+                    indicator_selected = { fg = primary, bg = "none" },
+                },
+            }
+        end,
     },
 
     -- Indentation Guides
@@ -183,7 +197,7 @@ return {
         },
     },
 
-    -- Which-Key (Keybinding Discoverability)
+    -- Which-Key
     {
         "folke/which-key.nvim",
         event = "VeryLazy",

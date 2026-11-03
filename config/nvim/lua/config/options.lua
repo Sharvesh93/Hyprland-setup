@@ -25,6 +25,7 @@ opt.incsearch = true
 -- Cursor & Visuals
 opt.cursorline = true
 opt.termguicolors = true
+opt.guifont = "Maple Mono NF CN:h11"
 opt.signcolumn = "yes"
 opt.scrolloff = 8
 opt.sidescrolloff = 8

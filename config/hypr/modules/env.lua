@@ -12,3 +12,6 @@ hl.env("CLUTTER_BACKEND", "wayland")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+
+-- Inhibit Quickshell's internal persistent reload popup
+hl.env("QS_NO_RELOAD_POPUP", "1")

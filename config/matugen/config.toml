@@ -1,0 +1,30 @@
+[config]
+reload_apps = false
+
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty.conf"
+output_path = "~/.config/matugen/generated/kitty.conf"
+
+[templates.nvim]
+input_path = "~/.config/matugen/templates/colors.lua"
+output_path = "~/.config/nvim/lua/generated/colors.lua"
+
+[templates.quickshell_qml]
+input_path = "~/.config/matugen/templates/Colors.qml"
+output_path = "~/.config/quickshell/themes/Colors.qml"
+
+[templates.quickshell_json]
+input_path = "~/.config/matugen/templates/colors.json"
+output_path = "~/.config/quickshell/themes/colors.json"
+
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland-colors.conf"
+output_path = "~/.config/hypr/colors.conf"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.config/matugen/generated/rofi.rasi"
+
+[templates.rofi_wallpaper]
+input_path = "~/.config/matugen/templates/rofi-wallpaper.rasi"
+output_path = "~/.config/rofi/wallpaper-select.rasi"

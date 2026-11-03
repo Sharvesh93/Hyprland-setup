@@ -13,28 +13,15 @@ return {
                 "css",
                 "diff",
                 "html",
-                "java",
                 "javascript",
-                "jsdoc",
                 "json",
-                "jsonc",
                 "lua",
-                "luadoc",
-                "luap",
                 "markdown",
-                "markdown_inline",
-                "printf",
                 "python",
-                "query",
                 "regex",
-                "rust",
-                "sql",
                 "toml",
-                "tsx",
-                "typescript",
                 "vim",
                 "vimdoc",
-                "xml",
                 "yaml",
             },
             highlight = {
@@ -53,7 +40,10 @@ return {
             },
         },
         config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
+            local ok, configs = pcall(require, "nvim-treesitter.configs")
+            if ok and configs then
+                configs.setup(opts)
+            end
         end,
     },
 }

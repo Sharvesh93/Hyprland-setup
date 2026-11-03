@@ -1,5 +1,6 @@
 configuration {
 	modi:                       "drun";
+    font:                       "Maple Mono NF CN 10.5";
     show-icons:                 true;
     display-drun:               "Applications";
 	drun-display-format:        "{name}";

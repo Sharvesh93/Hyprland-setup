@@ -1,0 +1,7 @@
+singleton HyprlandService 1.0 HyprlandService.qml
+singleton AudioService 1.0 AudioService.qml
+singleton BrightnessService 1.0 BrightnessService.qml
+singleton BatteryService 1.0 BatteryService.qml
+singleton NetworkService 1.0 NetworkService.qml
+singleton SysmonService 1.0 SysmonService.qml
+singleton NotificationService 1.0 NotificationService.qml

@@ -1,25 +1,31 @@
+-- Hyprland Look & Feel: Clean, Minimalist, Borderless
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
+		gaps_in = 3,
+		gaps_out = 6,
 		border_size = 0,
+		layout = "dwindle",
 	},
 
 	decoration = {
 		rounding = 8,
-		rounding_power = 10,
+		rounding_power = 2,
+
+		active_opacity = 0.98,
+		inactive_opacity = 0.88,
 
 		shadow = {
-			enabled = true,
-			range = 4,
-			render_power = 3,
+			enabled = false,
 		},
 
 		blur = {
 			enabled = true,
-			size = 3,
-			passes = 4,
-			vibrancy = 0.1696,
+			size = 6,
+			passes = 3,
+			new_optimizations = true,
+			xray = false,
+			vibrancy = 0.20,
+			noise = 0.02,
 		},
 	},
 })
