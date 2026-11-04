@@ -80,7 +80,7 @@ PACMAN_PACKAGES=(
     hyprlock
     hypridle
     hyprpolkitagent
-    noctalia
+
     quickshell
     xdg-desktop-portal-hyprland
     
@@ -93,7 +93,7 @@ PACMAN_PACKAGES=(
     kitty
     fish
     
-    node
+    nodejs
     npm 
     docker 
     docker-compose
@@ -122,26 +122,18 @@ PACMAN_PACKAGES=(
     fzf
     fd
     zoxide
-
     pipewire
     pipewire-pulse
     pipewire-alsa
     wireplumber
-
     nm-connection-editor
-     
     blueman 
     bluez
     bluez-utils
-
     tlp
-    
     base-devel
-
     flatpak
-
     libnotify
-
     glu
     libxcrypt-compat
 )
@@ -150,11 +142,9 @@ AUR_PACKAGES=(
 
     ttf-iosevka-nerd
 
-    matugen-bin
-    
-    macOS
+    antigravity
 
-    bibata-cursor-theme-bin
+    visual-studio-code-bin
 
     cliphist
 
