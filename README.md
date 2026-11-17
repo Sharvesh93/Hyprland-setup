@@ -3,7 +3,7 @@
 # 🖥️ Hyprland Setup
 
 A clean, modern, and modular **Hyprland** dotfiles configuration for **Arch Linux**.
-
+⚠️ Do not install this yet — it is currently an unstable version.
 Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
 <!-- Badges: replace the repo URL placeholders below once published -->
 ![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
