@@ -9,23 +9,23 @@ local mainMod = "SUPER"
 -- SYSTEM & SESSION
 -- =========================================================================
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))                           -- Lock Screen
-hl.bind("SUPER + Escape", hl.dsp.exec_cmd("~/.config/rofi/scripts/powermenu.sh")) -- Power Menu
+hl.bind("SUPER + Escape", hl.dsp.exec_cmd("bash ~/.config/rofi/scripts/powermenu.sh")) -- Power Menu
 hl.bind(
     mainMod .. " + M",
-    hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+    hl.dsp.exec_cmd("hyprctl dispatch exit")
 ) -- Exit Session
 
 -- ================================================================
--- QUICKSHELL CONTROLS & IPC
+-- QUICKSHELL / WALLPAPER
 -- ================================================================
--- Custom Quickshell Application Launcher (with fallback to rofi if quickshell is reloading)
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("quickshell ipc call launcher toggle || rofi -show drun"))
--- Custom Quickshell Control Center / Quick Settings
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("quickshell ipc call control-center toggle"))
+-- Application launcher (Rofi; Quickshell owns the bar and wallpaper picker).
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("rofi -show drun"))
+-- Notification center.
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("swaync-client -t"))
 
--- Wallpaper Picker & Theme switcher
-hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("~/.local/bin/rice-theme.sh random"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.local/bin/rice-theme.sh select"))
+-- Wallpaper picker (Quickshell) and instant random wallpaper.
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("qs ipc call wallpaper random"))
 
 -- =========================================================================
 -- APPLICATIONS & LAUNCHERS

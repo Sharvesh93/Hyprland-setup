@@ -79,13 +79,9 @@ fi
 # Permissions
 # ---------------------------------------------------------------------
 
-if [[ -d "$HOME/.config/rofi" ]]; then
-    chmod +x "$HOME/.config/rofi/"* 2>/dev/null || true
-fi
-
-if [[ -d "$HOME/.config/waybar" ]]; then
-    chmod +x "$HOME/.config/waybar/"* 2>/dev/null || true
-fi
+# Helper scripts must be executable for Hyprland keybindings to work.
+find "$HOME/.config/rofi" "$HOME/.config/hypr" -type f -name '*.sh' \
+    -exec chmod +x {} + 2>/dev/null || true
 
 # ---------------------------------------------------------------------
 # Finish
@@ -95,19 +91,23 @@ echo
 success "Installation completed successfully."
 
 
-printf "----------------------------------------------------------"
-echo "---------------- COMPLETED INSTILATION ---------------------"
-echo  "----------------------------------------------------------"
-echo "A reboot is recommended before logging into Hyprland."
+printf '%s\n' "----------------------------------------------------------"
+printf '%s\n' "------------- INSTALLATION COMPLETED SUCCESSFULLY ----------"
+printf '%s\n' "----------------------------------------------------------"
+echo "Log out and back in (or reboot) to start Hyprland with the new setup."
 
-read -rp "Reboot now? [Y/n]: " answer
-
+# Don't fail the installer when running non-interactively (e.g. piped to a log).
+read -rp "Reboot now? [y/N]: " answer || answer="n"
 
 case "${answer,,}" in
-    n|no)
-        echo "Reboot skipped."
+    y|yes)
+        if [[ "$EUID" -eq 0 ]]; then
+            reboot
+        else
+            sudo reboot
+        fi
         ;;
     *)
-        reboot
+        echo "Reboot skipped."
         ;;
 esac

@@ -88,13 +88,9 @@ ln -s \
 # Permissions
 ################################################################################
 
-if [[ -d "$TARGET_CONFIG/rofi" ]]; then
-    chmod +x "$TARGET_CONFIG/rofi/"* 2>/dev/null || true
-fi
-
-if [[ -d "$TARGET_CONFIG/waybar" ]]; then
-    chmod +x "$TARGET_CONFIG/waybar/"* 2>/dev/null || true
-fi
+# Keybindings and autostart call these directly, so they must be executable.
+find "$TARGET_CONFIG/rofi" "$TARGET_CONFIG/hypr" -type f -name '*.sh' \
+    -exec chmod +x {} + 2>/dev/null || true
 
 ################################################################################
 # Finished

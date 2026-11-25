@@ -4,7 +4,7 @@
 # 🖥️ Hyprland Setup
 
 A clean, modern, and modular **Hyprland** dotfiles configuration for **Arch Linux**.
-Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
+Built around a minimal Wayland workflow with a **Quickshell** status bar and wallpaper picker, **Rofi**, **Kitty**, **Fish**, **SwayNC**, **Hyprlock**, and **Neovim**.
 <!-- Badges: replace the repo URL placeholders below once published -->
 ![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-58E1FF?style=for-the-badge&logo=wayland&logoColor=white)
@@ -53,7 +53,8 @@ Built around a minimal Wayland workflow with **Waybar**, **Rofi**, **Kitty**, **
 ## ✨ Features
 
 - 🪟 **Hyprland** — modular, Lua-based configuration split across logical files (keybindings, animations, monitors, input, window rules, etc.)
-- 📊 **Waybar** — custom status bar with its own colors and styling
+- 📊 **Quickshell** — glassy status bar with workspaces, window title, clock and hardware pills
+- 🖼️ **Quickshell wallpaper picker** — searchable thumbnail grid, random wallpaper and live Matugen theming (`Super+W` / `Super+Tab`)
 - 💻 **Kitty** — configured Terminal emulator
 - 🐟 **Fish** — shell configuration with custom functions, completions, and themes
 - 🚀 **Rofi** — application launcher with a custom theme
@@ -77,16 +78,17 @@ Hyprland-setup/
 │   ├── hypr/          # Hyprland config (modular Lua), hyprlock.conf, helper scripts
 │   ├── kitty/         # Kitty Terminal configuration
 │   ├── nvim/          # Neovim configuration (Lua-based)
+│   ├── quickshell/    # Status bar + wallpaper picker (QML) and fallback colors.json
 │   ├── rofi/          # Rofi launcher config and theme
-│   ├── swaync/        # SwayNC notification center config and styling
-│   └── waybar/        # Waybar config, colors, and styling
+│   └── matugen/       # Dynamic theme templates and generated files
 ├── Wallpapers/         # Wallpaper collection (images and videos)
 ├── screenshots/         # Preview images used in this README
 ├── scripts/
 │   ├── backup.sh              # Backs up existing ~/.config directories before install
 │   ├── install-packages.sh    # Installs required pacman/AUR/flatpak packages
 │   ├── install-configs.sh     # Copies config/ into ~/.config
-│   └── install-wallpapers.sh  # Copies wallpapers into ~/Pictures/Wallpapers
+│   ├── install-wallpapers.sh  # Copies wallpapers and applies the initial theme
+│   └── wallpaper.sh           # Shared wallpaper/theme helper used by QML and keybinds
 ├── install.sh           # Main installer, runs the scripts above in order
 └── README.md
 ```
@@ -96,11 +98,11 @@ Hyprland-setup/
 | Path | Description |
 |------|-------------|
 | `config/hypr/` | Core Hyprland configuration, split into modules (`monitor.lua`, `keybindings.lua`, `animations.lua`, `input.lua`, `window.lua`, `window_rule.lua`, `look.lua`, `env.lua`, `misc.lua`, `autostart.lua`), plus `hyprlock.conf` and helper shell scripts |
-| `config/waybar/` | Waybar configuration (`config.jsonc`), styling (`style.css`), color definitions, and a launch script |
+| `config/quickshell/` | `shell.qml` (default config), `Statusbar/` (bar, pill, poller), `Wallpaper/` (picker + thumbnails), `themes/colors.json` fallback palette |
+| `config/matugen/` | Templates that regenerate Hyprland colors and Quickshell's `colors.json` from the active wallpaper |
 | `config/kitty/` | Kitty Terminal configuration |
 | `config/fish/` | Fish shell config, functions, completions, plugins, and themes |
-| `config/rofi/` | Rofi configuration and `.rasi` theme |
-| `config/swaync/` | SwayNC configuration and styling |
+| `config/rofi/` | Rofi configuration, `.rasi` theme and power menu script |
 | `config/nvim/` | Neovim configuration entry point and Lua modules (options, keymaps, autocmds, plugins) |
 | `Wallpapers/` | Wallpaper images and videos used with the desktop background |
 | `screenshots/` | Images referenced in this README's Preview section |
@@ -128,7 +130,7 @@ Before installing, make sure you have:
 git clone https://github.com/Sharvesh93/Hyprland-setup.git
 
 # Move into the project directory
-cd Hyperland-setup
+cd Hyprland-setup
 
 # Make the installer executable
 chmod +x install.sh
@@ -147,9 +149,9 @@ Running `install.sh` automatically executes `scripts/install-packages.sh`, which
 
 ## ⚙️ Configuration
 
-All configuration files live under the `config/` directory and mirror the structure of `~/.config`. During installation, `scripts/install-configs.sh` copies everything from `config/` directly into `~/.config`, so the resulting layout (e.g. `~/.config/hypr`, `~/.config/waybar`, `~/.config/kitty`) matches this repository exactly.
+All configuration files live under the `config/` directory and mirror the structure of `~/.config`. During installation, `scripts/install-configs.sh` copies everything from `config/` directly into `~/.config`, so the resulting layout (e.g. `~/.config/hypr`, `~/.config/quickshell`, `~/.config/kitty`) matches this repository exactly.
 
-> ⚠️ **Warning:** Existing configuration directories for `hypr`, `waybar`, `kitty`, `fish`, `rofi`, `swaync`, and `nvim` are backed up by `scripts/backup.sh` before being overwritten, but it's good practice to review your own setup beforehand.
+> ⚠️ **Warning:** Existing configuration directories for `hypr`, `quickshell`, `matugen`, `rofi`, `kitty`, `fish`, `fontconfig`, `nvim`, and `swaync` are backed up by `scripts/backup.sh` before being overwritten, but it's good practice to review your own setup beforehand.
 
 ---
 
@@ -171,7 +173,16 @@ This re-runs the full installation flow, including backing up your current confi
 
 ## ⌨️ Keybindings
 
-Hyprland keybindings are defined inside `config/hypr/modules/keybindings.lua`. A helper script, `config/hypr/help-bindings.sh`, is also included to assist with viewing bindings.
+Hyprland keybindings are defined inside `config/hypr/modules/keybindings.lua`.
+
+| Keys | Action |
+|------|--------|
+| `Super + W` | Toggle the Quickshell wallpaper picker |
+| `Super + Tab` | Apply a random wallpaper |
+| `Super + Space` | Rofi application launcher |
+| `Super + O` | Notification center |
+| `Super + M` | Exit Hyprland |
+| `Super + Escape` | Power menu |
 
 You're encouraged to open this file and adjust keybindings to match your workflow — the modular structure makes it easy to find and edit just the bindings without touching the rest of the Hyprland configuration.
 
@@ -181,11 +192,12 @@ You're encouraged to open this file and adjust keybindings to match your workflo
 
 This setup is designed to be modified. Common customization points include:
 
-- 🖼️ **Wallpapers** — add or replace files in `Wallpapers/`, then update `config/hypr/start-wallpaper.sh` or your wallpaper tool of choice
-- 📊 **Waybar** — edit `config/waybar/config.jsonc` for modules/layout and `config/waybar/style.css` (with `config/waybar/colors/`) for appearance
+- 🖼️ **Wallpapers** — add files to `Wallpapers/` and re-run `scripts/install-wallpapers.sh`, or pick them live with `Super + W`
+- 📊 **Status bar** — edit `config/quickshell/Statusbar/StatusBar.qml` for modules and `Pill.qml` for styling
+- 🖼️ **Wallpaper picker** — edit `config/quickshell/Wallpaper/WallpaperPicker.qml`
 - 💻 **Kitty theme** — edit `config/kitty/kitty.conf`
-- 🔤 **Fonts** — adjust font settings inside the relevant app configs (Kitty, Waybar, Rofi)
-- 🎨 **Colors** — most components reference color files or variables that can be edited independently (e.g. `config/waybar/colors/`)
+- 🔤 **Fonts** — Iosevka Nerd Font is used by QML and Hyprland; adjust `config/fontconfig/fonts.conf` for fallbacks
+- 🎨 **Colors** — Matugen writes `~/.config/quickshell/themes/colors.json` and `~/.config/hypr/colors.conf`; `config/quickshell/themes/colors.json` is the static fallback
 - 🖥️ **Monitor configuration** — edit `config/hypr/modules/monitor.lua` to match your display setup
 
 ---

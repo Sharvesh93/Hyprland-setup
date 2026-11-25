@@ -1,32 +1,7 @@
-# Disable fish greeting
-set -g fish_greeting
+  
+  # Zoxide - smarter cd
+zoxide init fish | source
 
-# Source Matugen generated colors and syntax highlighting
-if test -f ~/.config/matugen/generated/colors.fish
-    source ~/.config/matugen/generated/colors.fish
-end
-
-# Aliases
-alias ls="eza --icons --color=always"
-alias ll="ls -lh"
-alias la="ls -A"
-alias gs="git status"
-alias y="yazi"
-alias cd="z" 
-# History settings
-set -g fish_history_max_items 50000
-
-# Integrations
-if command -sq zoxide
-    zoxide init fish | source
-end
-
-if command -sq fzf
-    fzf --fish | source
-end
-
-
-# ------------  VARIABLES ------------------
-set -Ux EDITOR nvim
-set -Ux VISUAL nvim 
-fastfetch
+# FZF - fuzzy finder
+fzf --fish | source
+# Commands to run in interactive sessions can go here

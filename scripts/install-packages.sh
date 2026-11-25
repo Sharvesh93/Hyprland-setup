@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 
-# Decorate this script with the following to make it more robust:
-
-
 set -Eeuo pipefail
 IFS=$'\n\t'
 
@@ -32,10 +29,13 @@ error() {
 # Cleanup
 ################################################################################
 
-TMPDIR=""
+# Never shadow $TMPDIR: mktemp uses it to decide where to create directories.
+BUILD_TMP=""
 
 cleanup() {
-    [[ -n "$TMPDIR" && -d "$TMPDIR" ]] && rm -rf "$TMPDIR"
+    if [[ -n "$BUILD_TMP" && -d "$BUILD_TMP" ]]; then
+        rm -rf -- "$BUILD_TMP"
+    fi
 }
 
 trap cleanup EXIT
@@ -82,6 +82,7 @@ PACMAN_PACKAGES=(
     hyprpolkitagent
 
     quickshell
+    matugen
     xdg-desktop-portal-hyprland
     
     eza
@@ -95,9 +96,10 @@ PACMAN_PACKAGES=(
     
     nodejs
     npm 
-    docker 
+    docker
     docker-compose
-    cron
+    cronie
+    otf-font-awesome
     
 
     neovim
@@ -174,11 +176,11 @@ if ! command -v yay >/dev/null; then
 
     log "Installing yay..."
 
-    TMPDIR="$(mktemp -d)"
+    BUILD_TMP="$(mktemp -d)"
 
-    git clone https://aur.archlinux.org/yay.git "$TMPDIR"
+    git clone https://aur.archlinux.org/yay.git "$BUILD_TMP"
 
-    pushd "$TMPDIR" >/dev/null
+    pushd "$BUILD_TMP" >/dev/null
 
     makepkg -si --noconfirm
 
@@ -190,25 +192,6 @@ else
 
 fi
 
-if ! command -v paru >/dev/null; then
-
-    log "Installing paru..."
-
-    TMPDIR="$(mktemp -d)"
-
-    git clone https://aur.archlinux.org/paru.git "$TMPDIR"
-
-    pushd "$TMPDIR" >/dev/null
-
-    makepkg -si --noconfirm
-
-    popd >/dev/null
-
-else
-
-    success "paru already installed."
-
-fi
 ################################################################################
 # AUR
 ################################################################################
@@ -231,7 +214,9 @@ enable_service() {
 
     local service="$1"
 
-    if systemctl list-unit-files | grep -q "^${service}"; then
+    # `systemctl cat` avoids the SIGPIPE from piping list-unit-files into grep -q
+    # (which makes the whole pipeline fail when pipefail is enabled).
+    if systemctl cat "$service" >/dev/null 2>&1; then
 
         sudo systemctl enable --now "$service"
 
@@ -256,11 +241,3 @@ enable_service "bluetooth.service"
 
 echo
 success "All packages installed successfully."
-
-sleep 5
-
-printf "============================== \n"
-
-printf "\n Everything is downlaoded \n"
-
-printf "============================== \n"

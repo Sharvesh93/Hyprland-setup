@@ -19,7 +19,7 @@ warn() {
 }
 
 error() {
-    printf "\033[1;31mError:\033[0m %s\n" "$1"
+    printf "\033[1;31mError:\033[0m %s\n" "$1" >&2
     exit 1
 }
 
@@ -35,7 +35,9 @@ TARGET_WALLPAPERS="$HOME/Pictures/Wallpapers"
 SOURCE_SCRIPT="$SCRIPT_DIR/scripts/wallpaper.sh"
 TARGET_SCRIPT="$HOME/.local/bin/wallpaper.sh"
 
-DEFAULT_WALLPAPER="$TARGET_WALLPAPERS/the_girl.jpg"
+# Must be a file that actually exists in Wallpapers/ (the old value
+# "the_girl.jpg" did not exist, so no wallpaper or theme was ever applied).
+DEFAULT_WALLPAPER="$TARGET_WALLPAPERS/wallhaven-211xrg.jpg"
 
 ################################################################################
 # Checks
@@ -53,7 +55,7 @@ mkdir -p "$TARGET_WALLPAPERS"
 mkdir -p "$HOME/.local/bin"
 
 ################################################################################
-# Install Wallpapers
+# Install wallpapers
 ################################################################################
 
 log "Copying wallpapers..."
@@ -63,71 +65,34 @@ cp -a "$SOURCE_WALLPAPERS/." "$TARGET_WALLPAPERS/"
 success "Wallpapers installed."
 
 ################################################################################
-# Install wallpaper script
+# Install helper script
 ################################################################################
 
 if [[ -f "$SOURCE_SCRIPT" ]]; then
-
-    install -Dm755 \
-        "$SOURCE_SCRIPT" \
-        "$TARGET_SCRIPT"
-
+    install -Dm755 "$SOURCE_SCRIPT" "$TARGET_SCRIPT"
     success "Wallpaper script installed."
-
 else
-
-    warn "wallpaper.sh not found."
-
+    error "wallpaper.sh not found."
 fi
 
 ################################################################################
-# Set Default Wallpaper
+# Apply initial wallpaper + theme
 ################################################################################
 
-if [[ -f "$DEFAULT_WALLPAPER" ]]; then
+if [[ ! -f "$DEFAULT_WALLPAPER" ]]; then
+    DEFAULT_WALLPAPER="$(find "$TARGET_WALLPAPERS" -type f \
+        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+        -print -quit)"
+fi
 
-    if command -v awww >/dev/null; then
-
-        log "Setting default wallpaper..."
-
-        awww img "$DEFAULT_WALLPAPER" || warn "Failed to set wallpaper."
-
-    else
-
-        warn "awww is not installed."
-
+if [[ -n "$DEFAULT_WALLPAPER" && -f "$DEFAULT_WALLPAPER" ]]; then
+    log "Applying initial wallpaper and generating theme..."
+    if ! "$TARGET_SCRIPT" init "$DEFAULT_WALLPAPER"; then
+        warn "Could not apply the initial wallpaper/theme. Run '$TARGET_SCRIPT init' later."
     fi
-
 else
-
-    warn "Default wallpaper not found."
-
+    warn "No wallpapers found to apply."
 fi
-
-################################################################################
-# Generate Matugen Theme
-################################################################################
-
-if command -v matugen >/dev/null && [[ -f "$DEFAULT_WALLPAPER" ]]; then
-
-    log "Generating Matugen theme..."
-
-    matugen image \
-        "$DEFAULT_WALLPAPER" \
-        --mode dark \
-        --source-color-index 0 \
-        --quiet || warn "Matugen failed."
-
-else
-
-    warn "Skipping Matugen."
-
-fi
-
-################################################################################
-# Done
-################################################################################
 
 echo
-
 success "Wallpaper installation completed."

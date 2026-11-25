@@ -1,11 +1,16 @@
 hl.on("hyprland.start", function()
-	-- Wallpaper daemon
+	-- Wallpaper daemon (the helper below will start it again if it dies).
 	hl.exec_cmd("awww-daemon")
-	-- Custom wallpaper & color theme initialization
-	hl.exec_cmd("~/.local/bin/rice-theme.sh init")
-	-- Minimalist Custom Quickshell desktop
+
+	-- Restore the last wallpaper and regenerate the Matugen palette.
+	hl.exec_cmd("~/.local/bin/wallpaper.sh init")
+
+	-- Quickshell status bar + wallpaper picker (default config = ~/.config/quickshell/shell.qml).
 	hl.exec_cmd("quickshell")
-	-- Idle daemon & cursor
+
+	-- Idle daemon.
 	hl.exec_cmd("hypridle")
+
+	-- Cursor theme/size (also exported in env.lua).
 	hl.exec_cmd("hyprctl setcursor macOS 20")
 end)

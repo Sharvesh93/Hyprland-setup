@@ -27,10 +27,12 @@ BACKUP_DIR="$BACKUP_ROOT/$(date +%Y-%m-%d_%H-%M-%S)"
 
 CONFIGS=(
     hypr
-    waybar
+    quickshell
+    matugen
     rofi
     kitty
     fish
+    fontconfig
     nvim
     swaync
 )
